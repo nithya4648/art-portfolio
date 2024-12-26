@@ -1,288 +1,196 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
-
-/*reset css*/
-*{
-    margin: 0%;
-    padding: 0%;
-   
-}
-body{
-    background-color: #242424;
-}
-/*navigation-bar*/
-#navigation{
-    background: scroll;
-    display: flex;
-    justify-content: space-between;
-    background-color: #242424;
-    color: #a7a7a7;
-    box-shadow: 1px 0px 9px 2px #5f5e5e; 
-}
-.navname{
-    font-family: 'Lora', serif;;
-    padding: 5px 10px 5px 10px; 
-  
-}
-.links li{
-   display: flex;
-   float: left;
-   list-style: none;
-   margin: 15px 0px 5px 10px;
-   font-family:'Lora', serif;;
-}
-nav a:hover {
-    cursor: pointer;
-    color: #ffffffec;
-    transition: all 0.3s ease-in-out;
-}
-/*profile-picture
-#profile-picture{
-    height: 500px;
-    width: 100%;
-    background: gray url(face3.jpg)  center no-repeat;
-    background-size:cover;
-}
-.pro-pic{
-    display:block;
-    position: relative;
-    left: 15%;
-    top: 35%;
-}
-.pro-pic h1{
-    text-align: center;
-}*/
-#profile-picture {
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300&display=swap');
+/* Reset CSS */
+* {
     margin: 0;
     padding: 0;
-    background-image: url('face4.jpg');
-   
-    background-size: cover; 
-    background-position: center center;
-    height: 100vh; 
-    
-    align-items: center;
-    justify-content: center;
-}
-
-.pro-pic {
-    position: relative;
-    right: 20%;
-    left: 0%;
-    top: 25%;
-    background-color: #b8b8b869;
-    border-radius: 0px 60px 60px 0px;
-    color: #b8b8b8;
-    display: inline-block;
-    padding: 20px; 
-}
-.pro-pic button{
-    margin: 10px  0px  0px  150px;
-    background-color: #242424;
-    color: rgb(126, 126, 126);
-    padding: 5px;
-    border-radius: 10px;
-    border: #868686 solid 1px ;
-}
-.pro-pic button:hover{
-    background-color:#868686 ;
-    color: whitesmoke;
-}
-/*styling the main continer*/
-main{
-    background-color: gray;
-}
-/*catogeires*/
-#catogories{
-    background-size: center center;
-    align-items: center;
-    justify-content: center;
-}
-.welcome-note{
-   text-align: center;
-   padding: 50px;
-}
-.welcome-note h1{
-    font-family:'Lora', serif;
-    padding-bottom: 20px;
+    box-sizing: border-box;;
 } 
 
+::-webkit-scrollbar{
+    width: 0px;
+}
 
-/*
-.gallery{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.gallery img:hover{
-    opacity: 70%;
-    transition:0.2s ease-in-out;
-}
-.img img{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 30px;
-    flex-basis: 20%;
-    height: 450px;
-}
-.seemore a{
-text-align: center;
-justify-content: center;
-text-decoration: none;
-color: rgb(5, 5, 5);
-font-weight:bolder;
-position: absolute;
-left: 50%;
-top: 20%;
-opacity: 100%;
-}*/
-/*art gallary examles
-.gallery-catagories{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    position: relative;
-}
-.gallery-catagories-parts img{
-    position: relative;
-    display: flex;
-    height: 450px;
-    flex-basis: 20%;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
-}
-.gallery-catagories-parts a{
-   
-}
-.gallery-catagories-parts:hover{
-    transition:0.2s ease-in-out;
-    opacity: 60%;
-   }
-
-/*hover properties
-.gallery-catagories-parts a{
-    text-align: center;
-    justify-content: center;
-    text-decoration: none;
-    color: rgb(5, 5, 5);
-    font-weight:bolder;
-    position: relative;
-    left: 50%;
-    top: 50%;
-    
-}*/
-/*
-.see-more:hover{
-    opacity: 60%;
-}
-.gallery-catagories-parts p:hover{
-    cursor: pointer;
-    visibility:inherit;
-}
-media quries
-@media screen and (max-width: 800px){
-    .img{
-        flex-basis: 50%;
-    }
-}
-@media screen and (max-width: 400px) {
-    .img {
-        flex-basis: 100%;
-    }
-}*/
-/*in touch
-#in-touch{
+body {
     margin: 0;
-    padding: 0;
-    background-image: url('bg1.jpg');
-    background-size: cover; 
-    background-position: center center;
-    height: 100vh; 
+    background: black; /* Galaxy background */
+    overflow-y: scroll; /* Enable vertical scrolling */
+    height: 200vh; /* Make the page scrollable */
+    width: 80%;
+    margin: auto;
+}
+
+#galaxy {
+    position: fixed; /* Fixed background */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Behind all content */
+    pointer-events: none; /* Prevent interaction */
+}
+
+/* Styling for stars */
+.star {
+    position: absolute;
+    background: rgb(221, 221, 221);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+
+
+/*header style*/
+.header {
+    display: flex;
+    justify-content: center;
+    gap:20%;
+    align-items: center;
+    margin: auto;
+    height: 80px;
+    width: 80%;
+    position: fixed;
+    z-index: 1;
+    background-color: #00000059;
+}
+.name{
+    color: #ffffff;
+    font-family: 'Merienda', cursive;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 150px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.2s;
+    font-variant: small-caps;
+    font-size: 20px;
+}
+
+.nav-links li a:hover {
+    font-size: 16px;
+}
+
+/* Main Section Styles */
+#home {
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.in-touch-class {
-    color:  #a7a7a7;
-    text-align: center;
-}
-.in-touch-class button{
-    margin-top: 10px;
-    background-color: #242424;
-    color: rgb(126, 126, 126);
-    padding: 5px;
-    border-radius: 10px;
-    border: #868686 solid 1px ;
-}
-.in-touch-class button:hover{
-    background-color:#868686 ;
-    color: whitesmoke;
-}
-about me
-#about-me{
-    padding: 10px;
-    color: #b8b8b8;
-}
-.about{
-    display: flex;
+    margin: auto;
 }
 
-.about img{
-    padding: 30px;
+#logo1 {
     height: 400px;
     width: 400px;
+    border-radius: 50%;
 }
-.about p{
-    padding: 30px;
-    font-variant: small-caps;
-    text-align: justify;
-    margin-top: 9%;
+
+.logo-container {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    color: #797979;
-}
-@media screen and (max-width: 1000px){
-    .about {
-        display: block;
-        text-align: center;
+    margin: auto;
+    text-align: center; 
+    h1 {
+        color:#a0a0a0;;
+        font-family: 'Merienda', cursive;
+        font-variant: small-caps;
     }
 }
-@media screen and (max-width: 1000px) {
-    .about p{
-        margin-top: 2%;
-        justify-content: center;
+
+/*about section*/
+.section-title {
+    color: #a0a0a0;;
+    p{
+        font-size: 30px;
     }
 }
-/*learn more
-.learnmore ul li a {  
-   display: flex;
-   list-style: none;
-   margin: 5px;
-   padding: 10px;
-   text-decoration: none;
-   color: #080808;
-   font-family:'Lora', serif;
-   justify-content: end;
-   }
-   @media screen and (max-width: 1000px) {
-    .learnmore ul li a{
-     justify-content:center;
-     background-color: gray;
+
+.about-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dp{
+    img{
+        height: 400px;
+        width: 400px;
     }
 }
-@media screen and (min-width: 1000px) {
-    .learnmore ul li a{
-        /*margin-right: 10%;
-        justify-content:center;
-        background-color: gray;
-    }
+.para p {
+    color: #afaeae;
+    padding: 20px;
 }
-#footer{
-   background-color: none;
-   text-align: center;
-   font-variant: small-caps;
-   padding: 10px;
-   color: #dadada;
-}*/
+
+/*Image Demonstration Section*/
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-container {
+    position: relative;
+    margin: 10px;
+}
+
+.image-container img {
+    height: 500px;
+    flex-basis: 30%;
+   
+    transition: transform 0.2s ease-in-out;
+}
+
+.image-container:hover img {
+    transform: scale(0.9);
+    box-shadow: 1px 1px 10px 3px #ffffff;
+    transition: all 0.2s ease-out;
+    filter: brightness(60%);
+    
+}
+/* Logo Image Section Styles */
+.logo-image img {
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+}
+
+.logo-image {
+    text-align: center;
+    padding: 10px;
+}
+
+.logo-image img:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 2px #e7e7e7;
+    transition: all 0.3s ease-out;
+}
+
+/* Footer Section Styles */
+footer {
+    background-color: #131313;
+    color: #afaeae;
+    padding: 25px;
+    text-align: center;
+    font-family: Arial;
+    font-variant: small-caps;
+}
+
+footer a {
+    color: #afaeae;
+}
+footer a:hover{
+    color: white;
+    transition: 0.3s;
+}
+
+
+
+
+
