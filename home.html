@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scornith Art Gallery</title>
-    <link rel="stylesheet" href="art-gallary.css">
-    <link rel="icon" href="img/img.png">
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" href="img/logo2.png">
 </head>
 <!-- Header Section -->
 <header class="header">
-    <h2 class="name">Scornith-Art</h2>
+    <h2 class="name1">Scornith-Art</h2>
     <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#profile">Profile</a></li>
@@ -20,108 +20,87 @@
 </header>
 
 <body>
-    <div id="galaxy"></div>
-    <script>
-        // Select the galaxy container
-        const galaxy = document.getElementById('galaxy');
-
-        // Number of stars based on viewport size
-        const numStars = Math.min(500, window.innerWidth / 2); // Adjust star count for performance
-
-        // Function to generate random stars
-        function createStars() {
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-
-                // Random position
-                const x = Math.random() * 100; // Percentages for scaling
-                const y = Math.random() * 100;
-
-                // Random size
-                const size = Math.random() * 1 + 1; // Sizes between 1px and 4px
-
-                // Apply styles
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.top = `${y}vh`; // Use viewport-relative units
-                star.style.left = `${x}vw`;
-
-                // Append the star to the galaxy container
-                galaxy.appendChild(star);
-            }
-        }
-
-        // Create stars on load
-        window.addEventListener('load', createStars);
-        ransform = `translateY(${scrollOffset * 0.2}px)`; // Parallax effect
-    </script>
-
     <!-- Main Section -->
     <main id="home">
-        <div class="logo-container">
-            <img id="logo1" src="img/logo-final.jpg" alt="Scornith Logo">
-            <h1><b>Scornith-Art</b></h1>
-        </div>
+        <p class="name2">Scornith-Art</p>
     </main>
-
-    <!-- About Section -->
-    <section class="about-section">
-        <div class="section-title">
-            <p>About</p>
-        </div>
-        <br><br>
-        <div class="about-items">
-            <div class="dp">
-                <img src="img/img1.jpg" alt="">
-            </div>
-            <div class="para">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, fuga. In accusamus quos similique
-                    atque harum repudiandae quasi ratione, voluptate officiis distinctio repellat, quae, voluptatum
-                    officia inventore commodi nesciunt. Doloremque impedit sequi veritatis qui officiis. Tempore quia
-                    quam quasi laboriosam, debitis soluta nostrum porro. Doloribus tempora perferendis vero nisi
-                    explicabo!</p>
-            </div>
-        </div>
-    </section>
-
+    <br><br>
     <!-- Image Demonstration Section -->
-    <section class="image-section">
+    <section id="gallery">
         <div class="section-title">
             <p>Gallery</p>
         </div>
         <br><br>
-        <div class="gallery">
-            <div class="image-container">
+        <div class="gallery-item">
+            <div class="img-div">
                 <img src="img/img1.jpg" alt="Artwork 1">
             </div>
 
-            <div class="image-container">
+            <div class="img-div">
                 <img src="img/img2.jpg" alt="Artwork 2">
             </div>
 
 
-            <div class="image-container">
+            <div class="img-div">
                 <img src="img/img3.jpg" alt="Artwork 3">
             </div>
 
 
-            <div class="image-container">
+            <div class="img-div">
                 <img src="img/img4.jpg" alt="Artwork 4">
             </div>
 
 
-            <div class="image-container">
+            <div class="img-div">
                 <img src="img/img5.jpg" alt="Artwork 5">
             </div>
 
 
-            <div class="image-container">
+            <div class="img-div">
                 <img src="img/img6.jpg" alt="Artwork 6">
             </div>
         </div>
     </section>
+    <br><br>
+    <!-- About Section -->
 
+    <section id="about">
+        <div class="section-title">
+            <p>Gallery</p>
+        </div>
+        <br><br>
+        <div class="info-dp-section">
+            <div class="about-info">
+                <p>
+                    Hi! My name is Vinod. I'm a web developer and digital visual artist. I love creating things that
+                    exist on the internet. My interest in web development started in 2021 when I decided to upload
+                    my digital concept arts online.
+                </p>
+                <br />
+                <p>
+                    Instead of creating an online Concepts Art website, i started
+                    enjoying web development. Creating custom things for web taught
+                    me a lot about design & development!
+                </p>
+                <br />
+                <!-- Resume button -->
+                <button class="resume-btn" id="resume-btn" onclick="openURL()">
+                    <div class="sign">
+                        <svg viewBox="0 0 640 512">
+                            <path
+                                d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" />
+                        </svg>
+                    </div>
+
+                    <div class="text">Resume</div>
+                </button>
+            </div>
+
+            <div class="profile" data-aos="fade-up">
+                <img src="src/webp/vinod (2).webp" alt="Vinod Jangid" tabindex="0" aria-label="image of vinod" />
+            </div>
+        </div>
+    </section>
     <!-- Logo Image Section -->
     <section class="logo-image">
         <img src="img/img.png" alt="Scornith Logo">
@@ -129,9 +108,13 @@
 
     <!-- Footer Section -->
     <footer>
-        <h3>Powered by <a href="#">Scornith-Art</a></h3>
+        <div class="footer-background">
+            <div class="footer-blob"></div>
+        </div>
+        <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
+            <article aria-label="Back to top">&#8592;BACK TO TOP</article>
+        </button>
     </footer>
-
 </body>
 
 </html>
