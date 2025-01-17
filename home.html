@@ -6,84 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scornith Art Gallery</title>
     <link rel="stylesheet" href="home.css">
-    <link rel="icon" href="img/logo2.png">
+    <link rel="icon" href="img/img.png">
     <script src="home.js" defer></script>
 </head>
-<!-- Header Section -->
-<header class="header">
-    <h2 class="name1">Scornith-Art</h2>
-    <ul class="nav-links">
-        <li><a href="#gallery">Showcase</a></li>
-        <li><a href="#about">The Maker</a></li>
-        <li><a href="#journey">Journey</a></li>
-        <li><a href="#contact">Reach Out</a></li>
-    </ul>
-</header>
-<!--mobile nav-->
-<header class="header1">
-    <div class="navbar1">
+
+<body>
+    <!-- Header Section -->
+    <div class="header">
         <h2 class="name1">Scornith-Art</h2>
-        <a href="#menu" id="toggle" onclick="display()"><span></span></a>
-    </div>
-    <div id="menu">
-        <ul>
+        <ul class="nav-links">
             <li><a href="#gallery">Showcase</a></li>
             <li><a href="#about">The Maker</a></li>
             <li><a href="#journey">Journey</a></li>
             <li><a href="#contact">Reach Out</a></li>
         </ul>
     </div>
-</header>
+    <!--mobile nav-->
+    <div class="header1">
+        <div class="navbar1">
+            <h2 class="name1">Scornith-Art</h2>
+            <a href="#menu" id="toggle" onclick="display()"><span></span></a>
+        </div>
+        <div id="menu">
+            <ul>
+                <li><a href="#gallery">Showcase</a></li>
+                <li><a href="#about">The Maker</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#contact">Reach Out</a></li>
+            </ul>
+        </div>
+    </div>
 
-<script>
-    var theToggle = document.getElementById('toggle');
-    var menu = document.getElementById('menu');
-    var lastScrollTop = 0;
-    // Toggle button and menu display
-    theToggle.onclick = function () {
-        toggleClass(this, 'on');   
-        toggleClass(menu, 'show'); 
-    };
-    function hasClass(elem, className) {
-        return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-    }
-    function addClass(elem, className) {
-        if (!hasClass(elem, className)) {
-            elem.className += ' ' + className;
+    <script>
+        var theToggle = document.getElementById('toggle');
+        var menu = document.getElementById('menu');
+        var lastScrollTop = 0;
+        // Toggle button and menu display
+        theToggle.onclick = function () {
+            toggleClass(this, 'on');
+            toggleClass(menu, 'show');
+        };
+        function hasClass(elem, className) {
+            return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
         }
-    }
-    function removeClass(elem, className) {
-        var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
-        if (hasClass(elem, className)) {
-            while (newClass.indexOf(' ' + className + ' ') >= 0) {
-                newClass = newClass.replace(' ' + className + ' ', ' ');
+        function addClass(elem, className) {
+            if (!hasClass(elem, className)) {
+                elem.className += ' ' + className;
             }
-            elem.className = newClass.replace(/^\s+|\s+$/g, '');
         }
-    }
-    function toggleClass(elem, className) {
-        var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, " ") + ' ';
-        if (hasClass(elem, className)) {
-            while (newClass.indexOf(" " + className + " ") >= 0) {
-                newClass = newClass.replace(" " + className + " ", " ");
+        function removeClass(elem, className) {
+            var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+            if (hasClass(elem, className)) {
+                while (newClass.indexOf(' ' + className + ' ') >= 0) {
+                    newClass = newClass.replace(' ' + className + ' ', ' ');
+                }
+                elem.className = newClass.replace(/^\s+|\s+$/g, '');
             }
-            elem.className = newClass.replace(/^\s+|\s+$/g, '');
-        } else {
-            elem.className += ' ' + className;
         }
-    }
-    // Hide menu on scroll down, show on scroll up
-    window.addEventListener("scroll", function () {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down
-            menu.classList.remove('show');
-            theToggle.classList.remove('on');
+        function toggleClass(elem, className) {
+            var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, " ") + ' ';
+            if (hasClass(elem, className)) {
+                while (newClass.indexOf(" " + className + " ") >= 0) {
+                    newClass = newClass.replace(" " + className + " ", " ");
+                }
+                elem.className = newClass.replace(/^\s+|\s+$/g, '');
+            } else {
+                elem.className += ' ' + className;
+            }
         }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
-    });
-</script>
-<body>
+        // Hide menu on scroll down, show on scroll up
+        window.addEventListener("scroll", function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                menu.classList.remove('show');
+                theToggle.classList.remove('on');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
+        });
+    </script>
+
     <!-- Main Section -->
     <div class="mobile-blob-1"></div>
     <div class="mobile-blob-2"></div>
@@ -142,8 +144,8 @@
         </div>
         <br><br>
         <div class="info-dp-section">
-            <div class="profile" >
-                <img src="src/webp/vinod (2).webp" alt="Vinod Jangid" tabindex="0" aria-label="image of vinod" />
+            <div class="profile">
+                <img src="img/img.png" alt="dp picture" />
             </div>
             <div class="about-info">
                 <p>
@@ -224,6 +226,9 @@
         <div class="contact-background">
             <div class="contact-blob"></div>
         </div>
+        <div class="contact-title">
+            <p>Draw the Line to Reach Me</p>
+        </div>
         <div class="logos">
             <a href="" target="_blank" tabindex="0" aria-label="My instagram"><svg viewBox="0 0 448 512"
                     class="SocialHandle">
@@ -254,7 +259,7 @@
             &#169; 2025</p>
     </footer>
     <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
-        <article aria-label="Back to top">&#8592;BACK TO TOP</article>
+        &#8592;BACK TO TOP
     </button>
 </body>
 
