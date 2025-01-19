@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scornith Art Gallery</title>
     <link rel="stylesheet" href="home.css">
-    <link rel="icon" href="img/img.png">
+    <link rel="icon" href="img/logo2.png">
     <script src="home.js" defer></script>
 </head>
 
 <body>
-    <!-- Header Section -->
+    <!--header section-->
+    <header>
+        <div id="preloader"></div>
+
+        <noscript>Allow Javascript</noscript>
+    </header>
+
+    <!--navigation Section -->
     <div class="header">
         <h2 class="name1">Scornith-Art</h2>
         <ul class="nav-links">
@@ -21,6 +28,7 @@
             <li><a href="#contact">Reach Out</a></li>
         </ul>
     </div>
+
     <!--mobile nav-->
     <div class="header1">
         <div class="navbar1">
@@ -37,62 +45,15 @@
         </div>
     </div>
 
-    <script>
-        var theToggle = document.getElementById('toggle');
-        var menu = document.getElementById('menu');
-        var lastScrollTop = 0;
-        // Toggle button and menu display
-        theToggle.onclick = function () {
-            toggleClass(this, 'on');
-            toggleClass(menu, 'show');
-        };
-        function hasClass(elem, className) {
-            return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-        }
-        function addClass(elem, className) {
-            if (!hasClass(elem, className)) {
-                elem.className += ' ' + className;
-            }
-        }
-        function removeClass(elem, className) {
-            var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
-            if (hasClass(elem, className)) {
-                while (newClass.indexOf(' ' + className + ' ') >= 0) {
-                    newClass = newClass.replace(' ' + className + ' ', ' ');
-                }
-                elem.className = newClass.replace(/^\s+|\s+$/g, '');
-            }
-        }
-        function toggleClass(elem, className) {
-            var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, " ") + ' ';
-            if (hasClass(elem, className)) {
-                while (newClass.indexOf(" " + className + " ") >= 0) {
-                    newClass = newClass.replace(" " + className + " ", " ");
-                }
-                elem.className = newClass.replace(/^\s+|\s+$/g, '');
-            } else {
-                elem.className += ' ' + className;
-            }
-        }
-        // Hide menu on scroll down, show on scroll up
-        window.addEventListener("scroll", function () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                // Scrolling down
-                menu.classList.remove('show');
-                theToggle.classList.remove('on');
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
-        });
-    </script>
-
     <!-- Main Section -->
     <div class="mobile-blob-1"></div>
     <div class="mobile-blob-2"></div>
-    <main id="home">
+    <main>
+        <div id="home"></div>
         <p class="name2">Scornith-Art</p>
     </main>
     <br><br>
+
     <!-- Image Demonstration Section -->
     <section id="gallery">
         <div class="section-title">
@@ -145,7 +106,7 @@
         <br><br>
         <div class="info-dp-section">
             <div class="profile">
-                <img src="img/img.png" alt="dp picture" />
+                <img src="" alt="dp picture" />
             </div>
             <div class="about-info">
                 <p>
@@ -170,7 +131,8 @@
         </div>
     </section>
     <br><br><br>
-    <!--blog section-->
+
+    <!--journey section-->
     <section id="journey">
         <div class="journey">
             <p class="j-title">A Canvas of Beginnings: Where My Art Took Flight</p>
@@ -215,7 +177,8 @@
             <br>
         </div>
     </section>
-    <!-- Logo Image Section -->
+
+    <!-- logo image section -->
     <section class="logo-image">
         <div class="blob"></div>
         <img src="img/img.png" alt="Scornith Logo">
@@ -261,6 +224,7 @@
     <button class="fas" id="backtotopbutton" onclick="scrolltoTopfunction()">
         &#8592;BACK TO TOP
     </button>
+
 </body>
 
 </html>

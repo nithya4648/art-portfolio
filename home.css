@@ -39,11 +39,44 @@ body {
     background-color: #000000;
 }
 
-/*title style*/
+/*----------header section(preloader, noscript)style---------*/
+#preloader {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+    background-image: url(img/Pulse-0.4s-200px.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10%;
+    filter: invert(1);
+
+}
+
+noscript {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-dark-mode);
+    font-size: 4rem;
+    color: white;
+    z-index: 999999;
+}
+
+/*-----------title style-----------*/
 .section-title {
     color: var(--two);
     display: flex;
 }
+
 .section-title p {
     margin: auto;
     font-size: 60px;
@@ -52,7 +85,8 @@ body {
     background-image: linear-gradient(45deg, #001f30, #0069a1, #00aeff);
     color: transparent;
 }
-/*header style*/
+
+/*----------header style------------*/
 .header {
     display: flex;
     justify-content: center;
@@ -97,7 +131,7 @@ body {
     display: none;
 }
 
-/* Main Section Styles */
+/*----------Main Section Styles----------*/
 #home {
     height: 100vh;
     display: flex;
@@ -106,8 +140,9 @@ body {
     margin: auto;
     background-image: url(img/bg.gif);
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position-y: 10%;
+    background-size:contain;
+    background-position-y: 90%;
+    background-position-x: center;
 }
 
 .name2 {
@@ -136,7 +171,7 @@ body {
     }
 }
 
-/*Image Demonstration Section*/
+/*----------Image Demonstration Section----------*/
 .gallery-item {
     display: flex;
     flex-wrap: wrap;
@@ -174,11 +209,12 @@ body {
     box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.753);
 }
 
-/*about section*/
+/*----------about section------------*/
 #about {
-    width: 90%;
+    width: 80%;
     margin: auto;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -188,6 +224,7 @@ body {
     width: 90%;
     display: flex;
     margin: auto;
+    gap: 5%;
 }
 
 .about-info {
@@ -226,7 +263,6 @@ body {
     box-shadow: 2px 2px 0px inset #0069a1,
         -2px -2px 0px inset transparent;
     transition-duration: .5s;
-
 }
 
 .profile::after {
@@ -239,7 +275,6 @@ body {
     box-shadow: 2px 2px 0px inset transparent,
         -2px -2px 0px inset #0069a1;
     transition-duration: .5s;
-
 }
 
 .profile:hover::after {
@@ -252,7 +287,7 @@ body {
     transition-duration: .5s;
 }
 
-/*journey style*/
+/*----------journey style----------*/
 .journey {
     width: 80%;
     margin: auto;
@@ -285,7 +320,7 @@ body {
     color: #ffffff;
 }
 
-/* Logo Image Section Styles */
+/*----------logo section styles----------*/
 .logo-image {
     position: relative;
     text-align: center;
@@ -314,7 +349,7 @@ body {
     transform: scale(1.1);
 }
 
-/* Blob animation styles */
+/*----------blob animation styles----------*/
 .blob {
     position: absolute;
     z-index: 1;
@@ -327,7 +362,6 @@ body {
     animation: breath 1s linear infinite alternate-reverse;
 }
 
-/* Breathing animation */
 @keyframes breath {
     from {
         opacity: 100%;
@@ -338,7 +372,7 @@ body {
     }
 }
 
-/* contact Section Styles */
+/*----------contact section styles----------*/
 #contact {
     width: 100%;
     height: 50vh;
@@ -373,6 +407,7 @@ body {
     position: relative;
     top: 20%;
 }
+
 .contact-title p {
     font-size: 40px;
     font-weight: 400;
@@ -445,7 +480,7 @@ body {
 }
 
 
-/*footer style*/
+/*----------footer style----------*/
 footer {
     display: flex;
     justify-content: center;
@@ -453,13 +488,14 @@ footer {
     height: 30px;
     background-color: #000407;
 }
+
 footer p {
     font-size: 15px;
     color: gray;
     text-align: center;
 }
 
-/*back button*/
+/*----------back button----------*/
 #backtotopbutton {
     display: none;
     position: fixed;
@@ -492,18 +528,72 @@ footer p {
     text-decoration: line-through rgb(255, 255, 255);
 }
 
-/*mobile  and tab size*/
+/*----------size adjustment only for the main section-----------*/
+@media(max-width: 500px) {
+    #home {
+        background-size: 90%;
+        background-position-y: 70%;
+    }
+    .name2 {
+        font-size: 45px;
+        font-weight: 800;
+    }
+}
+
+@media(min-width: 501px) and (max-width: 640px) {
+    #home {
+        background-size:80%;
+        background-position-y: 90%;
+    }
+    .name2 {
+        font-size: 60px;
+        font-weight: 800;
+    }
+}
+
+@media(min-width: 641px) and (max-width: 800px) {
+    #home {
+        background-size:70%;
+        background-position-y: 90%;
+    }
+    .name2 {
+        font-size: 60px;
+        font-weight: 800;
+    }
+}
+
+@media(min-width: 801px) and (max-width: 990px) {
+    #home {
+        background-size:60%;
+        background-position-y:bottom;
+    }
+    .name2 {
+        font-size: 60px;
+        font-weight: 800;
+    }
+}
+@media(min-width: 991px){
+    #home {
+        position: relative;
+        top: 90%;
+        background-size:80%;
+    }
+    .name2 {
+        font-size: 90px;
+        font-weight: 800;
+    }
+}
+/*-------------------mobile  and tab size-------------*/
 @media(max-width: 991px) {
 
-    /*title style*/
+    /*----------title style----------*/
     .section-title p {
         margin: 10px auto;
         font-size: 35px;
         font-weight: 800;
     }
-    
 
-    /*nav*/
+    /*----------nav----------*/
     .header {
         display: none;
     }
@@ -564,7 +654,6 @@ footer p {
         top: 9px;
     }
 
-    /* Transform toggle button into an "X" on activation */
     #toggle.on span {
         background-color: transparent;
     }
@@ -577,7 +666,7 @@ footer p {
         transform: rotate(-45deg) translate(7px, -8px);
     }
 
-    /* Menu appearance */
+    /*Menu appearance*/
     #menu {
         display: flex;
         top: 10%;
@@ -618,16 +707,10 @@ footer p {
         color: #333;
     }
 
-    /*main section*/
+    /*----------main section-----------*/
     #home {
         height: 100vh;
-        background-size: contain;
-        background-position-y: 80%;
-    }
-
-    .name2 {
-        font-size: 45px;
-        font-weight: 800;
+        background-position-x: center;
     }
 
     .mobile-blob-1 {
@@ -657,7 +740,6 @@ footer p {
         animation: breath 1s linear infinite alternate-reverse;
     }
 
-    /* Breathing animation */
     @keyframes breath {
         from {
             opacity: 100%;
@@ -668,7 +750,7 @@ footer p {
         }
     }
 
-    /*Image Section*/
+    /*----------image section-----------*/
     .img-div {
         margin: 10px;
         height: 350px;
@@ -683,7 +765,7 @@ footer p {
         font-size: 10px;
     }
 
-    /*about section*/
+    /*-----------about section----------*/
     .info-dp-section {
         display: block;
         width: 100%;
@@ -701,7 +783,6 @@ footer p {
         width: 250px;
         height: auto;
     }
-    
 
     .about-info {
         width: 100%;
@@ -719,7 +800,7 @@ footer p {
         display: none;
     }
 
-    /* Logo Image Section Styles */
+    /*------------logo section styles------------*/
     .logo-image {
         height: 70vh;
     }
@@ -732,25 +813,21 @@ footer p {
     }
 
 
-    /* Blob animation styles */
+    /*-----------blob animation styles----------*/
     .blob {
         width: 300px;
         height: 400px;
     }
 
-    /* contact Section Styles */
+    /*----------contact section styles----------*/
     .contact-blob {
         width: 100%;
     }
 
-    .contact-title {
-        width: 90%;
-    }
     .contact-title p {
         font-size: 25px;
         font-weight: 100;
     }
-    
 
     .logos {
         gap: 20px;
@@ -761,15 +838,15 @@ footer p {
         height: 50px;
     }
 
-    /*footer style*/
+    /*----------footer style-----------*/
     footer p {
         font-size: 15px;
         color: gray;
-        margin: 10px auto; 
+        margin: 10px auto;
     }
-    
 
-    /*back button*/
+
+    /*-----------back button-----------*/
     #backtotopbutton {
         width: 1.3rem;
         height: 10rem;
