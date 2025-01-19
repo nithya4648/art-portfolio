@@ -85,12 +85,11 @@ noscript {
     background-image: linear-gradient(45deg, #001f30, #0069a1, #00aeff);
     color: transparent;
 }
-
 /*----------header style------------*/
 .header {
     display: flex;
-    justify-content: center;
-    gap: 20%;
+    justify-content: space-between;
+    padding: 2%;
     align-items: center;
     margin: auto;
     height: 80px;
@@ -108,7 +107,6 @@ noscript {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 150px;
 }
 
 .nav-links li a {
@@ -141,9 +139,46 @@ noscript {
     background-image: url(img/bg.gif);
     background-repeat: no-repeat;
     background-size:contain;
-    background-position-y: 90%;
     background-position-x: center;
 }
+
+.mobile-blob-1 {
+    position: absolute;
+    top: 5%;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    background-color: #0495e2;
+    border-radius: 50%;
+    filter: blur(200px);
+    opacity: 100%;
+    animation: breath 1s linear infinite alternate-reverse;
+}
+
+.mobile-blob-2 {
+    position: absolute;
+    right: 0%;
+    bottom: 5%;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    background-color: #0c004d;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 100%;
+    animation: breath 1s linear infinite alternate-reverse;
+}
+
+@keyframes breath {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 50%;
+    }
+}
+
 
 .name2 {
     font-size: 100px;
@@ -172,6 +207,11 @@ noscript {
 }
 
 /*----------Image Demonstration Section----------*/
+#gallery{
+    margin: 1%;
+}
+
+
 .gallery-item {
     display: flex;
     flex-wrap: wrap;
@@ -182,9 +222,9 @@ noscript {
 .img-div {
     position: relative;
     margin: 10px;
-    height: 500px;
+    height: 510px;
     width: 350px;
-    background-color: #0069a1;
+    background-color: #0069a1cc;
 }
 
 .img-div img {
@@ -201,6 +241,7 @@ noscript {
     text-align: center;
     margin: auto;
     color: white;
+    padding: 2%;
 }
 
 .img-div:hover img {
@@ -484,6 +525,7 @@ noscript {
 footer {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 100%;
     height: 30px;
     background-color: #000407;
@@ -712,42 +754,10 @@ footer p {
         height: 100vh;
         background-position-x: center;
     }
-
-    .mobile-blob-1 {
-        position: absolute;
-        top: 5%;
-        z-index: 1;
-        width: 100px;
-        height: 100px;
-        background-color: #0495e2;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 100%;
-        animation: breath 1s linear infinite alternate-reverse;
-    }
-
-    .mobile-blob-2 {
-        position: absolute;
-        right: 0%;
-        bottom: 5%;
-        z-index: 1;
-        width: 100px;
-        height: 100px;
-        background-color: #0c004d;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 100%;
-        animation: breath 1s linear infinite alternate-reverse;
-    }
-
-    @keyframes breath {
-        from {
-            opacity: 100%;
-        }
-
-        to {
-            opacity: 50%;
-        }
+    
+    .name2 {
+        font-size: 45px;
+        font-weight: 800;
     }
 
     /*----------image section-----------*/
@@ -855,3 +865,4 @@ footer p {
     }
 
 }
+
