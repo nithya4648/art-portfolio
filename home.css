@@ -1,5 +1,5 @@
+/*Created and build by Nithyadharshini*/
 @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300&display=swap');
-
 /* Reset CSS */
 * {
     margin: 0;
@@ -196,7 +196,6 @@ noscript {
     }
 }
 
-
 .name2 {
     font-size: 100px;
     font-weight: 800;
@@ -227,7 +226,6 @@ noscript {
 #gallery {
     margin: 1%;
 }
-
 
 .gallery-item {
     display: flex;
@@ -412,7 +410,6 @@ noscript {
     transform: scale(1.1);
 }
 
-
 .l-title {
     margin: auto;
     font-size: 40px;
@@ -563,7 +560,6 @@ noscript {
     transition-duration: .3s;
 }
 
-
 /*----------footer style----------*/
 footer {
     display: flex;
@@ -607,7 +603,6 @@ footer p {
     /* Smooth hover effect */
     text-decoration: line-through rgb(255, 255, 255);
 }
-
 
 /*----------size adjustment only for the main section-----------*/
 @media(max-width: 500px) {
@@ -708,10 +703,11 @@ footer p {
         display: flex;
         justify-content: space-between;
         width: 100%;
+        height: 54px;
         position: fixed;
         top: 0;
         padding: 10px 20px;
-        z-index: 2;
+        z-index: 3;
         background-color: #0069a1;
     }
 
@@ -769,15 +765,15 @@ footer p {
     /*Menu appearance*/
     #menu {
         display: flex;
-        top: 10%;
+        top: 5%;
         right: 0%;
         position: fixed;
-        height: 100vh;
+        height: 100%;
         width: 100%;
         border-radius: 0;
         background: #0069a1;
         box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-        z-index: 3;
+        z-index: 2;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -886,7 +882,7 @@ footer p {
 
     .logo-image img {
         z-index: 1;
-        height: 360px;
+        height: 440px;
         width: 300px;
         transition: all 0.3s ease-out;
     }
@@ -939,7 +935,7 @@ footer p {
     #backtotopbutton {
         width: 1.3rem;
         height: 10rem;
-        right: 0px;
+        right: 5px;
         bottom: 5px;
         font-size: 0.7rem;
     }
