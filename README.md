@@ -13,7 +13,7 @@ Scornith Art is a personal journey brought to life through a collection of uniqu
 
 ## 🔧 Technologies Used
 - HTML5: The backbone of the website structure.
-- **CSS3**: To design an aesthetic and responsive layout.
+- CSS3: To design an aesthetic and responsive layout.
 - JavaScript: For dynamic features like carousels and animations.
 - Version Control: Git and GitHub for collaborative and efficient development.
 

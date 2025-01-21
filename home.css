@@ -298,7 +298,7 @@ noscript {
     line-height: 25px;
     color: #ffffff;
 }
-
+/*
 .profile {
     width: 40%;
     display: flex;
@@ -345,7 +345,7 @@ noscript {
     transform: translate(-20px, -20px);
     transition-duration: .5s;
 }
-
+*/
 /*----------journey style----------*/
 #journey {
     width: 80%;
@@ -843,7 +843,7 @@ footer p {
         display: block;
         width: 100%;
     }
-
+/*
     .profile {
         width: 250px;
         height: 300px;
@@ -856,7 +856,7 @@ footer p {
         width: 250px;
         height: auto;
     }
-
+*/
     .about-info {
         width: 100%;
     }
