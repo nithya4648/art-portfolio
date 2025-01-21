@@ -52,9 +52,29 @@ window.addEventListener("load", function () {
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
         });
 
-
+//screenshort
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'PrintScreen') {
+      alert('Screenshots are disabled!');
+      e.preventDefault();
+    }
+  });
+  
+//right click
+document.addEventListener('contextmenu', (e) => e.preventDefault());
 
 // back to top button
-function scrolltoTopfunction() {
+// Show button when scrolling down
+window.onscroll = function () {
+    const backToTopButton = document.getElementById('backtotopbutton');
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopButton.style.display = 'block'; // Show the button
+    } else {
+        backToTopButton.style.display = 'none'; // Hide the button
+    }
+};
+
+// Scroll to the top when the button is clicked
+function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }

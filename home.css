@@ -7,6 +7,22 @@
     box-sizing: border-box;
 }
 
+*::selection {
+    background-color: transparent;
+}
+
+*::-moz-selection {
+    background: transparent;
+}
+
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -85,6 +101,7 @@ noscript {
     background-image: linear-gradient(45deg, #001f30, #0069a1, #00aeff);
     color: transparent;
 }
+
 /*----------header style------------*/
 .header {
     display: flex;
@@ -138,7 +155,7 @@ noscript {
     margin: auto;
     background-image: url(img/bg.gif);
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size: contain;
     background-position-x: center;
 }
 
@@ -207,7 +224,7 @@ noscript {
 }
 
 /*----------Image Demonstration Section----------*/
-#gallery{
+#gallery {
     margin: 1%;
 }
 
@@ -231,6 +248,9 @@ noscript {
     height: 400px;
     display: flex;
     margin: 20px auto;
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
 }
 
 .img-div p {
@@ -329,7 +349,7 @@ noscript {
 }
 
 /*----------journey style----------*/
-.journey {
+#journey {
     width: 80%;
     margin: auto;
     display: flex;
@@ -363,11 +383,13 @@ noscript {
 
 /*----------logo section styles----------*/
 .logo-image {
-    position: relative;
     text-align: center;
-    height: 100vh;
+    height: fit-content;
+    width: 80%;
+    margin: auto;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -388,6 +410,24 @@ noscript {
 
 .logo-image img:hover {
     transform: scale(1.1);
+}
+
+
+.l-title {
+    margin: auto;
+    font-size: 40px;
+    font-weight: 400;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(45deg, #003857, #0069a1, #00aeff);
+}
+
+.l-quotes {
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 25px;
+    color: gray;
 }
 
 /*----------blob animation styles----------*/
@@ -442,10 +482,13 @@ noscript {
 }
 
 .contact-title {
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    text-align: center;
+    margin: auto;
     top: 20%;
 }
 
@@ -537,38 +580,34 @@ footer p {
     text-align: center;
 }
 
-/*----------back button----------*/
+/* Back to Top Button */
 #backtotopbutton {
     display: none;
     position: fixed;
     right: 10px;
-    bottom: 20px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    bottom: 33px;
     border: none;
-    width: 2rem;
-    height: 10rem;
-    z-index: 10;
-    text-align: center;
-    transition: all 0.4s;
-    background-color: transparent;
-}
-
-#backtotopbutton {
-    z-index: 1;
+    width: 3rem;
+    height: fit-content;
     font-size: 0.8rem;
-    color: rgb(0, 153, 255);
     font-weight: 600;
     writing-mode: vertical-rl;
+    text-align: center;
+    color: rgb(0, 153, 255);
+    background-color: transparent;
     font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    z-index: 9999;
+    cursor: pointer;
+    transition: all 0.4s;
     mix-blend-mode: difference;
 }
 
 #backtotopbutton:hover {
-    transform: translate(0px, -20px);
+    transform: translateY(-10px);
+    /* Smooth hover effect */
     text-decoration: line-through rgb(255, 255, 255);
 }
+
 
 /*----------size adjustment only for the main section-----------*/
 @media(max-width: 500px) {
@@ -576,6 +615,7 @@ footer p {
         background-size: 90%;
         background-position-y: 70%;
     }
+
     .name2 {
         font-size: 45px;
         font-weight: 800;
@@ -584,9 +624,10 @@ footer p {
 
 @media(min-width: 501px) and (max-width: 640px) {
     #home {
-        background-size:80%;
+        background-size: 80%;
         background-position-y: 90%;
     }
+
     .name2 {
         font-size: 60px;
         font-weight: 800;
@@ -595,9 +636,10 @@ footer p {
 
 @media(min-width: 641px) and (max-width: 800px) {
     #home {
-        background-size:70%;
+        background-size: 70%;
         background-position-y: 90%;
     }
+
     .name2 {
         font-size: 60px;
         font-weight: 800;
@@ -606,27 +648,43 @@ footer p {
 
 @media(min-width: 801px) and (max-width: 990px) {
     #home {
-        background-size:60%;
-        background-position-y:bottom;
+        background-size: 60%;
+        background-position-y: bottom;
     }
+
     .name2 {
         font-size: 60px;
         font-weight: 800;
     }
 }
-@media(min-width: 991px){
+
+@media(min-width: 991px) {
     #home {
         position: relative;
         top: 90%;
-        background-size:80%;
+        background-size: 80%;
     }
+
     .name2 {
         font-size: 90px;
         font-weight: 800;
     }
 }
+
 /*-------------------mobile  and tab size-------------*/
 @media(max-width: 991px) {
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: #000007;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #005380;
+    }
 
     /*----------title style----------*/
     .section-title p {
@@ -714,7 +772,8 @@ footer p {
         top: 10%;
         right: 0%;
         position: fixed;
-        width: 150px;
+        height: 100vh;
+        width: 100%;
         border-radius: 0;
         background: #0069a1;
         box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
@@ -729,19 +788,27 @@ footer p {
         visibility: visible;
     }
 
+    ul {
+        align-content: center;
+    }
+
     ul,
     li {
         list-style: none;
         margin: 0;
-        padding: 0;
+        padding: 10px;
+        width: 100%;
     }
 
     li a {
         display: block;
-        padding: 10px;
+        padding: 20px;
         color: #ffffff;
         text-decoration: none;
         transition: color 0.2s;
+        justify-content: center;
+        text-align: center;
+        margin: auto;
     }
 
     li a:hover,
@@ -754,7 +821,7 @@ footer p {
         height: 100vh;
         background-position-x: center;
     }
-    
+
     .name2 {
         font-size: 45px;
         font-weight: 800;
@@ -812,16 +879,28 @@ footer p {
 
     /*------------logo section styles------------*/
     .logo-image {
-        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
     }
 
     .logo-image img {
         z-index: 1;
-        height: 400px;
+        height: 360px;
         width: 300px;
         transition: all 0.3s ease-out;
     }
 
+    .l-title {
+        margin: auto;
+        font-size: 30px;
+        font-weight: 400;
+    }
+
+    .l-quotes {
+        font-size: 20px;
+        font-weight: 300;
+    }
 
     /*-----------blob animation styles----------*/
     .blob {
@@ -862,7 +941,7 @@ footer p {
         height: 10rem;
         right: 0px;
         bottom: 5px;
+        font-size: 0.7rem;
     }
 
 }
-
