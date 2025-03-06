@@ -98,7 +98,7 @@ noscript {
     font-size: 60px;
     font-weight: 800;
     background-clip: text;
-    background-image: linear-gradient(45deg, #001f30, #0069a1, #00aeff);
+    background-image: linear-gradient(45deg,#b8c6f5, #1d8cc0, #112875);
     color: transparent;
 }
 
@@ -113,7 +113,7 @@ noscript {
     width: 100%;
     position: fixed;
     z-index: 3;
-    background-color: #0069a1;
+    background-color:#007dc0;
 }
 
 .name1 {
@@ -138,7 +138,7 @@ noscript {
 .nav-links li a:hover {
     border-radius: 25px;
     background-color: #d1f9fc;
-    color: #0069a1;
+    color:#007dc0;
 }
 
 /*mobile hidden*/
@@ -202,7 +202,7 @@ noscript {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(45deg, #00097b, #0195a8, #00097b);
+    background-image: linear-gradient(45deg, #00097b, #15b7cc, #00097b);
     animation: ease infinite gradiant 3s;
     -webkit-animation: ease infinite gradiant 3s;
     background-size: 400% 400%;
@@ -239,7 +239,7 @@ noscript {
     margin: 10px;
     height: 510px;
     width: 350px;
-    background-color: #0069a1cc;
+    background-color:#00679e;
 }
 
 .img-div img {
@@ -296,9 +296,9 @@ noscript {
     font-size: 20px;
     font-weight: 300;
     line-height: 25px;
-    color: #ffffff;
+    color: #ffffffd2;
 }
-/*
+
 .profile {
     width: 40%;
     display: flex;
@@ -319,7 +319,7 @@ noscript {
     width: 300px;
     position: absolute;
     z-index: -2;
-    box-shadow: 2px 2px 0px inset #0069a1,
+    box-shadow: 2px 2px 0px inset #007dc0,
         -2px -2px 0px inset transparent;
     transition-duration: .5s;
 }
@@ -332,7 +332,7 @@ noscript {
     position: absolute;
     z-index: -2;
     box-shadow: 2px 2px 0px inset transparent,
-        -2px -2px 0px inset #0069a1;
+        -2px -2px 0px inset #007dc0;
     transition-duration: .5s;
 }
 
@@ -345,7 +345,7 @@ noscript {
     transform: translate(-20px, -20px);
     transition-duration: .5s;
 }
-*/
+
 /*----------journey style----------*/
 #journey {
     width: 80%;
@@ -363,13 +363,13 @@ noscript {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(45deg, #003857, #0069a1, #00aeff);
+    background-image: linear-gradient(45deg,#0059ff, #00aeff, #0059ff);
 }
 
 .j-subtitle {
     font-size: 25px;
     font-weight: 200;
-    color: gray;
+    color: rgb(100, 116, 131);
 }
 
 .j-contant {
@@ -393,7 +393,7 @@ noscript {
 
 .logo-image img {
     z-index: 2;
-    height: 650px;
+    height: 655px;
     width: 500px;
     transition: all 0.3s ease-out;
 }
@@ -417,14 +417,14 @@ noscript {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(45deg, #003857, #0069a1, #00aeff);
+    background-image: linear-gradient(45deg,#116891, #1757aa, #00aeff);
 }
 
 .l-quotes {
     font-size: 30px;
     font-weight: 300;
     line-height: 25px;
-    color: gray;
+    color: rgb(255, 255, 255);
 }
 
 /*----------blob animation styles----------*/
@@ -433,7 +433,7 @@ noscript {
     z-index: 1;
     width: 600px;
     height: 600px;
-    background-color: #0069a1;
+    background-color:#007dc0;
     border-radius: 50%;
     filter: blur(300px);
     opacity: 100%;
@@ -493,7 +493,7 @@ noscript {
     font-size: 40px;
     font-weight: 400;
     background-clip: text;
-    background-image: linear-gradient(45deg, #001f30, #0069a1, #00aeff);
+    background-image: linear-gradient(45deg, #016397,#007dc0, #00aeff);
     color: transparent;
 }
 
@@ -521,7 +521,7 @@ noscript {
     border: 2px solid rgb(226, 222, 222);
     transition-duration: .3s;
     position: relative;
-    box-shadow: 0px 0px 0px #0069a1 inset;
+    box-shadow: 0px 0px 0px#007dc0 inset;
     transition-duration: .3s;
 }
 
@@ -536,7 +536,7 @@ noscript {
 }
 
 .logos a:hover {
-    box-shadow: 0px 0px 50px 100px #0069a1 inset;
+    box-shadow: 0px 0px 50px 100px#007dc0 inset;
     transition-duration: 1s;
     border: none;
 }
@@ -549,7 +549,7 @@ noscript {
     left: 0;
     border-radius: 50%;
     transform: scale(0);
-    background-color: #0069a1;
+    background-color:#007dc0;
     background-color: transparent;
     transition-duration: .3s;
     z-index: -1;
@@ -708,7 +708,7 @@ footer p {
         top: 0;
         padding: 10px 20px;
         z-index: 3;
-        background-color: #0069a1;
+        background-color:#007dc0;
     }
 
     .name1 {
@@ -771,7 +771,7 @@ footer p {
         height: 100%;
         width: 100%;
         border-radius: 0;
-        background: #0069a1;
+        background:#007dc0;
         box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
         z-index: 2;
         opacity: 0;
@@ -835,7 +835,8 @@ footer p {
     }
 
     .img-div p {
-        font-size: 10px;
+        font-size: 13px;
+        width:180px;
     }
 
     /*-----------about section----------*/
@@ -843,11 +844,11 @@ footer p {
         display: block;
         width: 100%;
     }
-/*
+
     .profile {
         width: 250px;
         height: 300px;
-        border: solid #0069a1 1px;
+        border: solid #007dc0 1px;
         margin: auto;
         margin-bottom: 20px;
     }
@@ -856,7 +857,7 @@ footer p {
         width: 250px;
         height: auto;
     }
-*/
+
     .about-info {
         width: 100%;
     }
