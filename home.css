@@ -601,13 +601,8 @@ footer p {
 
 #backtotopbutton:hover {
     transform: translateY(-10px);
-    /* Smooth hover effect */
-    text-decoration: line-through rgb(255, 255, 255);
 } 
 
-#backtotopbutton.clicked {
-    text-decoration: none;
-}
 /*----------size adjustment only for the main section-----------*/
 @media(max-width: 500px) {
     #home {
