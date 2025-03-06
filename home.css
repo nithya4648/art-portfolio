@@ -253,7 +253,7 @@ noscript {
 
 .img-div p {
     display: flex;
-    font-size: 20px;
+    font-size: 22px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -296,7 +296,7 @@ noscript {
     font-size: 20px;
     font-weight: 300;
     line-height: 25px;
-    color: #ffffffd2;
+    color: #ffffffa2;
 }
 
 .profile {
@@ -353,7 +353,7 @@ noscript {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    color: white;
+    color: #ffffffa2;
 }
 
 .j-title {
@@ -376,7 +376,7 @@ noscript {
     font-size: 20px;
     font-weight: 300;
     line-height: 25px;
-    color: #ffffff;
+    color: #ffffffa2;
 }
 
 /*----------logo section styles----------*/
@@ -417,7 +417,7 @@ noscript {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(45deg,#116891, #1757aa, #00aeff);
+    background-image: linear-gradient(45deg,#0059ff, #00aeff, #0059ff);
 }
 
 .l-quotes {
@@ -493,7 +493,7 @@ noscript {
     font-size: 40px;
     font-weight: 400;
     background-clip: text;
-    background-image: linear-gradient(45deg, #016397,#007dc0, #00aeff);
+    background-image: linear-gradient(45deg,#0059ff, #00aeff, #0059ff);
     color: transparent;
 }
 
@@ -580,6 +580,7 @@ footer p {
 #backtotopbutton {
     display: none;
     position: fixed;
+    padding: 7px;
     right: 10px;
     bottom: 33px;
     border: none;
@@ -602,8 +603,11 @@ footer p {
     transform: translateY(-10px);
     /* Smooth hover effect */
     text-decoration: line-through rgb(255, 255, 255);
-}
+} 
 
+#backtotopbutton.clicked {
+    text-decoration: none;
+}
 /*----------size adjustment only for the main section-----------*/
 @media(max-width: 500px) {
     #home {

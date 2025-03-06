@@ -75,8 +75,26 @@ window.onscroll = function () {
 };
 
 // Scroll to the top when the button is clicked
+window.addEventListener("scroll", function () {
+    let button = document.getElementById("backtotopbutton");
+
+    if (window.scrollY > 100) {
+        button.style.display = "block";
+    } else {
+        button.style.display = "none";
+        button.classList.remove("clicked"); 
+    }
+});
+
 function scrollToTop() {
+    let button = document.getElementById("backtotopbutton");
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    button.classList.add("clicked"); 
+
+    setTimeout(() => {
+        button.classList.remove("clicked");
+    }, 500);
 }
 
 
