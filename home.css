@@ -253,7 +253,7 @@ noscript {
 
 .img-div p {
     display: flex;
-    font-size: 22px;
+    font-size: 20px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -369,7 +369,7 @@ noscript {
 .j-subtitle {
     font-size: 25px;
     font-weight: 200;
-    color: rgb(100, 116, 131);
+    color: rgb(81, 123, 163);
 }
 
 .j-contant {
@@ -393,7 +393,7 @@ noscript {
 
 .logo-image img {
     z-index: 2;
-    height: 655px;
+    height: 680px;
     width: 500px;
     transition: all 0.3s ease-out;
 }
@@ -402,12 +402,9 @@ noscript {
     cursor: pointer;
 }
 
-.logo-image img {
-    transition: transform 0.3s ease-out;
-}
 
 .logo-image img:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 
 .l-title {
@@ -566,7 +563,7 @@ footer {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 30px;
+    height: 35px;
     background-color: #000407;
 }
 
@@ -599,8 +596,9 @@ footer p {
     mix-blend-mode: difference;
 }
 
-#backtotopbutton:hover {
+#backtotopbutton:active{
     transform: translateY(-10px);
+    text-decoration: line-through white;
 } 
 
 /*----------size adjustment only for the main section-----------*/
@@ -834,7 +832,7 @@ footer p {
     }
 
     .img-div p {
-        font-size: 13px;
+        font-size: 14px;
         width:180px;
     }
 
@@ -845,8 +843,8 @@ footer p {
     }
 
     .profile {
-        width: 250px;
-        height: 300px;
+        width: 180px;
+        height: 200px;
         border: solid #007dc0 1px;
         margin: auto;
         margin-bottom: 20px;
