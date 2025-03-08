@@ -4,6 +4,34 @@ window.addEventListener("load", function () {
     loader.style.display = "none";
 })
 
+//nav bar
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links li a");
+
+window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach((section, index) => {
+        const sectionTop = section.offsetTop - 150; // Adjust for fixed header
+        const sectionHeight = section.clientHeight;
+        const pageBottom = window.innerHeight + window.scrollY;
+
+        // Special handling for last section
+        if (index === sections.length - 1 && pageBottom >= document.body.offsetHeight - 50) {
+            current = section.getAttribute("id");
+        } else if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").substring(1) === current) {
+            link.classList.add("active");
+        }
+    });
+});
+
 //mobile nav
         var theToggle = document.getElementById('toggle');
         var menu = document.getElementById('menu');
