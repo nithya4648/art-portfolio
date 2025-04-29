@@ -337,7 +337,7 @@ noscript {
     font-size: 20px;
     font-weight: 300;
     line-height: 25px;
-    color: #ffffffa2;
+    color: #ffffffcc;
 }
 
 .profile {
@@ -884,16 +884,14 @@ footer p {
     }
 
     .profile {
-        width: 180px;
-        height: 210px;
-        border: solid #007dc0 1px;
+        height: 200px;
+        width: 150px;
         margin: auto;
-        margin-bottom: 20px;
     }
 
     .profile img {
-        width: 180px;
-        height: 210px;
+        height: 200px;
+        width: 150px;
     }
 
     .about-info {
