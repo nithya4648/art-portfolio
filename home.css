@@ -25,7 +25,8 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
+    scroll-padding-top: 80px;
 }
 
 ::-webkit-scrollbar {
@@ -87,7 +88,10 @@ noscript {
     color: white;
     z-index: 999999;
 }
-
+section {
+    scroll-margin-top: 100px; /* Adjust to match your fixed navbar height */
+  }
+  
 /*-----------title style-----------*/
 .section-title {
     color: var(--two);
