@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '10mb' })); // Increased limit for Base64 images
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/scornith_art')
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.log('❌ MongoDB Connection Error:', err));
 
@@ -89,7 +89,7 @@ app.delete('/api/orders/:id', async (req, res) => {
     }
 });
 app.get("/", (req, res) => {
-    res.send("Server is running 🚀");
+    res.send("Backend Running 🚀");
 });
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
