@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' })); // Increased limit for Base64 images
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/scornith_art')
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.log('❌ MongoDB Connection Error:', err));
 
@@ -88,7 +88,9 @@ app.delete('/api/orders/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
+app.get("/", (req, res) => {
+    res.send("Server is running 🚀");
+});
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

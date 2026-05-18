@@ -22,6 +22,7 @@ body {
     right: 0;
     height: 100vh;
     z-index: -2;
+    will-change: transform;
 }
 
 .bg-video {
@@ -77,6 +78,7 @@ body {
     pointer-events: none;
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    will-change: transform;
 }
 
 * {
