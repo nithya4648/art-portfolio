@@ -1,25 +1,21 @@
-# Scornith Art - A World of Creativity 🌟
+# Scornith Art Gallery 🌟
 
-Welcome to Scornith Art Gallery, where every stroke tells a story, and each canvas breathes life into emotions. This is not just an art portfolio—it's a reflection of passion, calmness, and the profound beauty of creation.
+A modern, cinematic portfolio and commission platform for Scornith Art. Built with a stunning deep-sea parallax aesthetic, it serves as both an immersive gallery for visitors and a powerful management tool for the artist. 
 
-## ✨ About Scornith Art
-Scornith Art is a personal journey brought to life through a collection of unique drawings and designs. Here, you'll find art that speaks of freedom, self-expression, and the joy of creating a world where worries and past traumas dissolve. Each piece is crafted with love, offering a glimpse into the artist's soul.
+**Designed and Built by Nithyadharshini © 2025**
 
-## 🚀 Features
-- Interactive Gallery: Explore captivating artworks in a visually immersive gallery.
-- Dynamic Blog Section: Read about the artist's journey, thoughts, and inspirations.
-- Contact & Connect: Reach out directly through email or social media links.
-- Smooth User Experience: A responsive, user-friendly design that works seamlessly across devices.
+## ✨ Key Features
+- **Cinematic Experience:** Immersive deep-sea parallax scrolling with procedural bubble particle animations.
+- **Glassmorphic UI:** Elegant, luxury-focused design using custom glassmorphism and modern typography.
+- **Automated Commission System:** A robust "Place Order" workflow with strict inline validation and reference photo uploads.
+- **Admin Dashboard:** A secure, built-in management system to view, edit, share, and export orders to Excel (CSV). Includes a safe-delete feature with a WhatsApp-style "Undo" toast.
+- **Interactive Chatbot:** A customized floating assistant for instant visitor engagement.
 
-## 🔧 Technologies Used
-- HTML5: The backbone of the website structure.
-- CSS3: To design an aesthetic and responsive layout.
-- JavaScript: For dynamic features like carousels and animations.
-- Version Control: Git and GitHub for collaborative and efficient development.
+## 🔧 Tech Stack
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Design:** CSS Glassmorphism, AOS Animations, Custom Canvas Particles
 
-## 🎨 Artistic Vision
-> _"Art is my sanctuary—a realm where time slows down, and every line I draw feels like a step closer to my true self."_  
-Through Scornith Art, I hope to share this experience and inspire others to embrace their creativity.
-
-🌐 Live Preview
-Check out the live website here: https://scornith-art-gallery.netlify.app/
+## 🌐 Live Preview
+Check out the live website here: [https://scornith-art-gallery.netlify.app/](https://scornith-art-gallery.netlify.app/)
