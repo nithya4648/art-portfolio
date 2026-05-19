@@ -1725,17 +1725,36 @@ section {
 @media (max-width: 991px) {
 
     /* 1. KILL THE 21MB BACKGROUND VIDEO
-       Replace with a smooth CSS gradient so the deep-sea
-       aesthetic is preserved without the huge download. */
+       Replace with an animated deep-sea CSS gradient so the
+       cinematic aesthetic is preserved without the download. */
     #dynamic-bg {
         display: none !important;
     }
+
+    /* Rich layered deep-sea gradient — mimics the video tones */
     body {
-        background: linear-gradient(180deg,
-            #030d22 0%,
-            #020818 40%,
-            #010a1c 100%) !important;
+        background:
+            radial-gradient(ellipse 120% 60% at 50% 0%,
+                rgba(0, 80, 160, 0.45) 0%,
+                transparent 65%),
+            radial-gradient(ellipse 80% 50% at 20% 80%,
+                rgba(0, 40, 100, 0.3) 0%,
+                transparent 60%),
+            linear-gradient(180deg,
+                #040f28 0%,
+                #020c1e 35%,
+                #010810 70%,
+                #000509 100%) !important;
+        background-color: #020c1e !important;
         background-attachment: scroll !important;
+        animation: seaShift 12s ease-in-out infinite alternate !important;
+    }
+
+    /* Subtle slow colour-shift so background feels alive */
+    @keyframes seaShift {
+        0%   { filter: hue-rotate(0deg) brightness(1);   }
+        50%  { filter: hue-rotate(8deg) brightness(1.06); }
+        100% { filter: hue-rotate(-6deg) brightness(0.96); }
     }
 
     /* 2. KILL CANVAS PARTICLE SYSTEM
@@ -1768,28 +1787,26 @@ section {
         background: rgba(3, 8, 20, 0.98) !important;
     }
 
-    /* 6. KILL HEAVY BLOB BLUR ANIMATIONS
-       blur(300px) + infinite animation = constant GPU repaint. */
+    /* 6. SOFTEN BLOB BLUR (keep visible — they ARE the effect on mobile)
+       Cut blur from 300px to 80px and kill the animation loop. */
     .blob {
         animation: none !important;
-        filter: blur(60px) !important;
-        opacity: 0.12 !important;
+        filter: blur(80px) !important;
+        opacity: 0.25 !important;
     }
     .blob1 {
         animation: none !important;
-        filter: blur(60px) !important;
-        opacity: 0.12 !important;
+        filter: blur(80px) !important;
+        opacity: 0.25 !important;
     }
     .mobile-blob-1,
     .mobile-blob-2 {
         animation: none !important;
-        filter: blur(50px) !important;
-        opacity: 0.1 !important;
+        filter: blur(60px) !important;
+        opacity: 0.2 !important;
     }
 
-    /* 7. PAUSE BUTTON PULSE ANIMATIONS
-       gentle-pulse runs on 3 elements simultaneously.
-       Replace with a simple static glow. */
+    /* 7. PAUSE BUTTON PULSE ANIMATIONS */
     .mobile-order-btn,
     .footer-order-btn,
     .nav-links li a.order-btn {
@@ -1803,28 +1820,30 @@ section {
         opacity: 0.6 !important;
     }
 
-    /* 9. ADD SCROLL CONTAINMENT TO SECTIONS
-       Prevents the browser from repainting the whole page
-       when a section's content changes. */
+    /* 9. ADD SCROLL CONTAINMENT TO SECTIONS */
     section {
         contain: layout style !important;
     }
 
-    /* 10. PROMOTE GALLERY ITEMS TO OWN COMPOSITOR LAYER
-       Prevents scroll from triggering full-page repaints. */
+    /* 10. PROMOTE GALLERY ITEMS TO OWN COMPOSITOR LAYER */
     .img-div {
         transform: translateZ(0);
         will-change: transform;
     }
 }
 
-/* Extra small phones: further reduce visual weight */
+/* Extra small phones: reduce blob opacity but keep them visible
+   so background is never completely blank */
 @media (max-width: 480px) {
     .blob,
-    .blob1,
+    .blob1 {
+        opacity: 0.18 !important;
+        filter: blur(70px) !important;
+    }
     .mobile-blob-1,
     .mobile-blob-2 {
-        display: none !important;
+        opacity: 0.14 !important;
+        filter: blur(50px) !important;
     }
     .name2 {
         animation: none !important;
@@ -1832,4 +1851,3 @@ section {
         background-size: 100% 100% !important;
     }
 }
-
