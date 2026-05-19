@@ -111,11 +111,11 @@ function updateScrollRender() {
     scrollTicking = false;
 }
 
-// Sea Particles Animation Engine (Desktop only — skipped on mobile/tablet)
+// Sea Particles Animation Engine — runs on all screen sizes
 let seaCtx = null;
 let bubbles = [];
 
-if (seaParticlesCanvas && !isMobileDevice) {
+if (seaParticlesCanvas) {
     seaCtx = seaParticlesCanvas.getContext('2d');
     
     function resizeSea() {
@@ -209,65 +209,55 @@ if (theToggle && menu) {
     });
 }
 
-// --- Cinema-Grade Seamless Dual-Video Crossfade Loop (Desktop only) ---
-// On mobile the CSS hides #dynamic-bg entirely, so we skip this
-// expensive timeupdate polling and just let video1 loop natively.
+// --- Cinema-Grade Seamless Dual-Video Crossfade Loop ---
 const video1 = document.getElementById('bg-video-1');
 const video2 = document.getElementById('bg-video-2');
 
 if (video1 && video2) {
-    if (isMobileDevice) {
-        // Mobile: simple native loop, no crossfade overhead.
-        video1.setAttribute('loop', '');
-        video2.removeAttribute('autoplay');
-        // video2 stays hidden — CSS already hides #dynamic-bg on mobile
-    } else {
-        // Desktop: full cinema crossfade.
-        const crossfadeDuration = 1.5; // seconds — matches CSS transition
-        let activeVideo = video1;
-        let inactiveVideo = video2;
-        let isCrossfading = false;
+    const crossfadeDuration = 1.5; // seconds — matches CSS transition
+    let activeVideo = video1;
+    let inactiveVideo = video2;
+    let isCrossfading = false;
 
-        // Remove loop so ended/timeupdate is captured properly
-        video1.removeAttribute('loop');
-        video2.removeAttribute('loop');
+    // Remove loop so ended/timeupdate is captured properly
+    video1.removeAttribute('loop');
+    video2.removeAttribute('loop');
 
-        // Throttle: only check crossfade every 500ms to reduce
-        // the overhead of the timeupdate event firing 4-30x/sec.
-        let lastCrossfadeCheck = 0;
-        function checkCrossfade() {
-            const now = performance.now();
-            if (now - lastCrossfadeCheck < 500) return;
-            lastCrossfadeCheck = now;
+    // Throttle: only check crossfade every 500ms to reduce
+    // the overhead of the timeupdate event firing 4-30x/sec.
+    let lastCrossfadeCheck = 0;
+    function checkCrossfade() {
+        const now = performance.now();
+        if (now - lastCrossfadeCheck < 500) return;
+        lastCrossfadeCheck = now;
 
-            if (!activeVideo.duration) return;
-            const remaining = activeVideo.duration - activeVideo.currentTime;
+        if (!activeVideo.duration) return;
+        const remaining = activeVideo.duration - activeVideo.currentTime;
 
-            if (remaining <= crossfadeDuration && !isCrossfading) {
-                isCrossfading = true;
-                inactiveVideo.currentTime = 0;
-                inactiveVideo.play().then(() => {
-                    activeVideo.classList.remove('active');
-                    inactiveVideo.classList.add('active');
-                    setTimeout(() => {
-                        activeVideo.pause();
-                        const temp = activeVideo;
-                        activeVideo = inactiveVideo;
-                        inactiveVideo = temp;
-                        isCrossfading = false;
-                    }, crossfadeDuration * 1000);
-                }).catch((err) => {
-                    console.warn("Crossfade play failed:", err);
+        if (remaining <= crossfadeDuration && !isCrossfading) {
+            isCrossfading = true;
+            inactiveVideo.currentTime = 0;
+            inactiveVideo.play().then(() => {
+                activeVideo.classList.remove('active');
+                inactiveVideo.classList.add('active');
+                setTimeout(() => {
+                    activeVideo.pause();
+                    const temp = activeVideo;
+                    activeVideo = inactiveVideo;
+                    inactiveVideo = temp;
                     isCrossfading = false;
-                });
-            }
+                }, crossfadeDuration * 1000);
+            }).catch((err) => {
+                console.warn("Crossfade play failed:", err);
+                isCrossfading = false;
+            });
         }
-
-        video1.addEventListener('timeupdate', () => {
-            if (activeVideo === video1) checkCrossfade();
-        });
-        video2.addEventListener('timeupdate', () => {
-            if (activeVideo === video2) checkCrossfade();
-        });
     }
+
+    video1.addEventListener('timeupdate', () => {
+        if (activeVideo === video1) checkCrossfade();
+    });
+    video2.addEventListener('timeupdate', () => {
+        if (activeVideo === video2) checkCrossfade();
+    });
 }
