@@ -11,7 +11,7 @@ const Order = mongoose.model('Order', orderSchema);
 
 async function cleanupDB() {
     try {
-        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/scornith_art');
+        await mongoose.connect(process.env.MONGO_URI);
         console.log('✅ Connected to MongoDB');
         
         // Update all orders where notes is the string "undefined" to be empty string

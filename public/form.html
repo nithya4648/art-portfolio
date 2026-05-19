@@ -403,7 +403,7 @@
                     });
 
                     if (response.ok) {
-                        alert('✨ Order Confirmed! ✨\n\nYour order has been saved to the database.\n\nClick OK to return.');
+                        alert('✨ Order Confirmed! ✨\n\nYour order has been sucessfully placed. We will contact you soon for further details.\n\nThank you for choosing Scornith-Art.');
                         event.target.reset();
                         
                         // Reset Custom Dropdown
@@ -431,7 +431,7 @@
                     }
                 } catch (err) {
                     console.error(err);
-                    alert('❌ Error: Could not connect to the server. Please make sure the backend is running.');
+                    alert('❌ Error: The sever is down. Please try again later or contact Nithyadharshini directly at 9370720618.');
                 }
             };
             reader.readAsDataURL(photoFile);
