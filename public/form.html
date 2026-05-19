@@ -481,8 +481,18 @@
             try {
                 // Add timestamp to prevent browser caching
                 const response = await fetch(`${API_URL}?t=${Date.now()}`);
-                const orders = await response.json();
-                console.log('📦 Orders loaded from server:', orders.map(o => ({ id: o._id, notes: o.notes })));
+
+                if (!response.ok) {
+                    throw new Error(`Server responded with status ${response.status}`);
+                }
+
+                // ✅ FIX: Server returns { success: true, data: [...] }
+                // Previously this was missing .data — orders was the whole object,
+                // causing forEach to throw "not a function" silently.
+                const result = await response.json();
+                const orders = result.data || [];
+
+                console.log('📦 Orders loaded from server:', orders.length, 'order(s)');
                 
                 const body = document.getElementById('orders-body');
                 const emptyState = document.getElementById('empty-state');
@@ -547,10 +557,11 @@
                     });
                 }
             } catch (err) {
-                console.error(err);
-                document.getElementById('orders-body').innerHTML = '<tr><td colspan="9" style="text-align:center; color: #ff4d4d;">Error loading orders. Is the server running?</td></tr>';
+                console.error('loadOrders error:', err);
+                document.getElementById('orders-body').innerHTML = `<tr><td colspan="10" style="text-align:center; color: #ff4d4d; padding: 20px;">❌ Error loading orders: ${err.message}</td></tr>`;
             }
         }
+
 
         async function updateOrderField(id, field, value) {
             const indicator = document.getElementById('save-indicator');

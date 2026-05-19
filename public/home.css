@@ -1,5 +1,4 @@
 /*Created and build by Nithyadharshini*/
-@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300&display=swap');
 
 /* Reset CSS */
 html, body {
@@ -22,7 +21,6 @@ body {
     right: 0;
     height: 100vh;
     z-index: -2;
-    will-change: transform;
 }
 
 .bg-video {
@@ -78,7 +76,6 @@ body {
     pointer-events: none;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    will-change: transform;
 }
 
 * {
@@ -1719,3 +1716,120 @@ section {
 @media (max-width: 991px) {
     .header { display: none !important; }
 }
+
+/* =========================================================
+   MOBILE & TABLET PERFORMANCE OPTIMIZATIONS
+   Targets devices ≤ 991px — kills expensive GPU operations
+   that cause scroll jank and video stutter on mobile.
+   ========================================================= */
+@media (max-width: 991px) {
+
+    /* 1. KILL THE 21MB BACKGROUND VIDEO
+       Replace with a smooth CSS gradient so the deep-sea
+       aesthetic is preserved without the huge download. */
+    #dynamic-bg {
+        display: none !important;
+    }
+    body {
+        background: linear-gradient(180deg,
+            #030d22 0%,
+            #020818 40%,
+            #010a1c 100%) !important;
+        background-attachment: scroll !important;
+    }
+
+    /* 2. KILL CANVAS PARTICLE SYSTEM
+       The 60fps canvas loop competes directly with scroll
+       rendering on mobile. Hidden via JS too (belt+braces). */
+    #sea-particles {
+        display: none !important;
+    }
+
+    /* 3. REMOVE backdrop-filter FROM GALLERY CARDS
+       This is the #1 cause of scroll jank on iOS & Android.
+       9 blurred cards scrolling = guaranteed dropped frames. */
+    .img-div {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* 4. REMOVE backdrop-filter FROM MOBILE NAVBAR */
+    .navbar1 {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(3, 8, 20, 0.94) !important;
+    }
+
+    /* 5. REMOVE backdrop-filter FROM FULL-SCREEN MENU */
+    #menu {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(3, 8, 20, 0.98) !important;
+    }
+
+    /* 6. KILL HEAVY BLOB BLUR ANIMATIONS
+       blur(300px) + infinite animation = constant GPU repaint. */
+    .blob {
+        animation: none !important;
+        filter: blur(60px) !important;
+        opacity: 0.12 !important;
+    }
+    .blob1 {
+        animation: none !important;
+        filter: blur(60px) !important;
+        opacity: 0.12 !important;
+    }
+    .mobile-blob-1,
+    .mobile-blob-2 {
+        animation: none !important;
+        filter: blur(50px) !important;
+        opacity: 0.1 !important;
+    }
+
+    /* 7. PAUSE BUTTON PULSE ANIMATIONS
+       gentle-pulse runs on 3 elements simultaneously.
+       Replace with a simple static glow. */
+    .mobile-order-btn,
+    .footer-order-btn,
+    .nav-links li a.order-btn {
+        animation: none !important;
+        box-shadow: 0 0 10px rgba(0, 174, 255, 0.3) !important;
+    }
+
+    /* 8. PAUSE STAR-LIGHTING TWINKLE ANIMATION */
+    .star-lighting {
+        animation: none !important;
+        opacity: 0.6 !important;
+    }
+
+    /* 9. ADD SCROLL CONTAINMENT TO SECTIONS
+       Prevents the browser from repainting the whole page
+       when a section's content changes. */
+    section {
+        contain: layout style !important;
+    }
+
+    /* 10. PROMOTE GALLERY ITEMS TO OWN COMPOSITOR LAYER
+       Prevents scroll from triggering full-page repaints. */
+    .img-div {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+}
+
+/* Extra small phones: further reduce visual weight */
+@media (max-width: 480px) {
+    .blob,
+    .blob1,
+    .mobile-blob-1,
+    .mobile-blob-2 {
+        display: none !important;
+    }
+    .name2 {
+        animation: none !important;
+        background-image: linear-gradient(45deg, #ffffff 0%, #00e5ff 100%) !important;
+        background-size: 100% 100% !important;
+    }
+}
+
