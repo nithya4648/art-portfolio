@@ -174,474 +174,672 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>// ===============================
-// SCORNITH ART - FULL FORM JS
-// ===============================
+    <script>
+        AOS.init({ duration: 800, once: true });
 
-AOS.init({ duration: 800, once: true });
+        // Toggle Password Visibility
+        function togglePassword() {
+            const passInput = document.getElementById('admin-pass');
+            const showPassCheckbox = document.getElementById('show-pass');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                showPassCheckbox.checked = true;
+            } else {
+                passInput.type = 'password';
+                showPassCheckbox.checked = false;
+            }
+        }
 
-// ===============================
-// TOGGLE PASSWORD
-// ===============================
-function togglePassword() {
-    const passInput = document.getElementById('admin-pass');
-    const checkbox = document.getElementById('show-pass');
+        // Admin credentials (you can add more accounts to this array in the future)
+        const ADMIN_ACCOUNTS = [
+            { user: 'nithya4648@gmail.com', pass: 'Cat1@artpassword' }
+        ];
+        let isLoggedIn = false;
 
-    if (passInput.type === 'password') {
-        passInput.type = 'text';
-        checkbox.checked = true;
-    } else {
-        passInput.type = 'password';
-        checkbox.checked = false;
-    }
-}
+        // Tab Switching Logic
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            if(tab === 'order') {
+                document.getElementById('order-section').classList.add('active');
+                document.querySelector('[onclick="switchTab(\'order\')"]').classList.add('active');
+            } else {
+                document.getElementById('admin-section').classList.add('active');
+                document.querySelector('[onclick="switchTab(\'admin\')"]').classList.add('active');
+                if (isLoggedIn) {
+                    document.getElementById('admin-login').style.display = 'none';
+                    document.getElementById('admin-dashboard').style.display = 'block';
+                    loadOrders();
+                } else {
+                    document.getElementById('admin-login').style.display = 'flex';
+                    document.getElementById('admin-dashboard').style.display = 'none';
+                }
+            }
+        }
 
-// ===============================
-// ADMIN LOGIN
-// ===============================
-const ADMIN_ACCOUNTS = [
-    {
-        user: 'nithya4648@gmail.com',
-        pass: 'Cat1@artpassword'
-    }
-];
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('admin-user').value.trim();
+            const pass = document.getElementById('admin-pass').value;
+            const errorEl = document.getElementById('login-error');
 
-let isLoggedIn = false;
+            // Check if credentials match any account in the ADMIN_ACCOUNTS array
+            const validAccount = ADMIN_ACCOUNTS.find(acc => acc.user === user && acc.pass === pass);
 
-// ===============================
-// TAB SWITCHING
-// ===============================
-function switchTab(tab) {
+            if (validAccount) {
+                isLoggedIn = true;
+                errorEl.textContent = '';
+                document.getElementById('admin-login').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                loadOrders();
+            } else {
+                errorEl.textContent = '❌ Invalid email or password.';
+                document.getElementById('admin-pass').value = '';
+            }
+            return false;
+        }
 
-    document.querySelectorAll('.tab-panel').forEach(panel => {
-        panel.classList.remove('active');
-    });
-
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-
-    if (tab === 'order') {
-
-        document.getElementById('order-section').classList.add('active');
-
-        document
-            .querySelector('[onclick="switchTab(\'order\')"]')
-            .classList.add('active');
-
-    } else {
-
-        document.getElementById('admin-section').classList.add('active');
-
-        document
-            .querySelector('[onclick="switchTab(\'admin\')"]')
-            .classList.add('active');
-
-        if (isLoggedIn) {
-
-            document.getElementById('admin-login').style.display = 'none';
-
-            document.getElementById('admin-dashboard').style.display = 'block';
-
-            loadOrders();
-
-        } else {
-
+        // Logout handler
+        function handleLogout() {
+            isLoggedIn = false;
+            document.getElementById('admin-user').value = '';
+            document.getElementById('admin-pass').value = '';
             document.getElementById('admin-login').style.display = 'flex';
-
             document.getElementById('admin-dashboard').style.display = 'none';
-        }
-    }
-}
-
-// ===============================
-// LOGIN FUNCTION
-// ===============================
-function handleLogin(event) {
-
-    event.preventDefault();
-
-    const user = document.getElementById('admin-user').value.trim();
-
-    const pass = document.getElementById('admin-pass').value;
-
-    const error = document.getElementById('login-error');
-
-    const valid = ADMIN_ACCOUNTS.find(acc =>
-        acc.user === user && acc.pass === pass
-    );
-
-    if (valid) {
-
-        isLoggedIn = true;
-
-        error.textContent = '';
-
-        document.getElementById('admin-login').style.display = 'none';
-
-        document.getElementById('admin-dashboard').style.display = 'block';
-
-        loadOrders();
-
-    } else {
-
-        error.textContent = '❌ Invalid email or password';
-
-        document.getElementById('admin-pass').value = '';
-    }
-
-    return false;
-}
-
-// ===============================
-// LOGOUT
-// ===============================
-function handleLogout() {
-
-    isLoggedIn = false;
-
-    document.getElementById('admin-user').value = '';
-
-    document.getElementById('admin-pass').value = '';
-
-    document.getElementById('admin-login').style.display = 'flex';
-
-    document.getElementById('admin-dashboard').style.display = 'none';
-
-    switchTab('order');
-}
-
-// ===============================
-// DELIVERY DATE
-// ===============================
-const dateInput = document.getElementById('delivery-date');
-
-const minDate = new Date();
-
-minDate.setDate(minDate.getDate() + 7);
-
-const y = minDate.getFullYear();
-
-const m = String(minDate.getMonth() + 1).padStart(2, '0');
-
-const d = String(minDate.getDate()).padStart(2, '0');
-
-dateInput.min = `${y}-${m}-${d}`;
-
-dateInput.value = `${y}-${m}-${d}`;
-
-// ===============================
-// CUSTOM DROPDOWN
-// ===============================
-function toggleDropdown(el) {
-
-    const options = el.nextElementSibling;
-
-    document.querySelectorAll('.custom-options').forEach(opt => {
-
-        if (opt !== options) {
-            opt.classList.remove('show');
-        }
-    });
-
-    el.classList.toggle('active');
-
-    options.classList.toggle('show');
-}
-
-function selectOption(el, value) {
-
-    const wrapper = el.closest('.custom-select-wrapper');
-
-    const select = wrapper.querySelector('.custom-select');
-
-    const hiddenInput = wrapper.querySelector('input[type="hidden"]');
-
-    const text = select.querySelector('.selected-text');
-
-    text.innerText = value;
-
-    hiddenInput.value = value;
-
-    select.classList.add('has-value');
-
-    wrapper.querySelectorAll('.custom-option').forEach(opt => {
-        opt.classList.remove('selected');
-    });
-
-    el.classList.add('selected');
-
-    select.classList.remove('active');
-
-    wrapper.querySelector('.custom-options').classList.remove('show');
-}
-
-// ===============================
-// CLOSE DROPDOWN OUTSIDE CLICK
-// ===============================
-window.onclick = function (event) {
-
-    if (!event.target.closest('.custom-select-wrapper')) {
-
-        document.querySelectorAll('.custom-options').forEach(opt => {
-            opt.classList.remove('show');
-        });
-
-        document.querySelectorAll('.custom-select').forEach(sel => {
-            sel.classList.remove('active');
-        });
-    }
-}
-
-// ===============================
-// FILE NAME UPDATE
-// ===============================
-function updateFileName(input) {
-
-    const display = document.getElementById('file-name');
-
-    const container = input.closest('.file-upload');
-
-    if (input.files[0]) {
-
-        display.innerText = input.files[0].name;
-
-        container.classList.add('has-file');
-
-    } else {
-
-        display.innerText = 'Click to upload your reference photo';
-
-        container.classList.remove('has-file');
-    }
-}
-
-// ===============================
-// CLEAR ERROR
-// ===============================
-function clearError(inputElement) {
-
-    const formGroup = inputElement.closest('.form-group');
-
-    if (!formGroup) return;
-
-    const errorText = formGroup.querySelector('.error-text');
-
-    if (errorText) {
-        errorText.style.display = 'none';
-    }
-
-    formGroup.querySelectorAll(
-        '.input-error'
-    ).forEach(el => {
-        el.classList.remove('input-error');
-    });
-}
-
-// ===============================
-// API URL
-// ===============================
-const API_URL = 'https://scornith-art.onrender.com/api/orders';
-
-// ===============================
-// ORDER SUBMIT
-// ===============================
-function handleOrderSubmit(event) {
-
-    event.preventDefault();
-
-    let isValid = true;
-
-    let firstInvalid = null;
-
-    const requiredInputs = [
-        'name',
-        'email',
-        'contact',
-        'delivery-date',
-        'size',
-        'photo'
-    ];
-
-    requiredInputs.forEach(id => {
-
-        const input = document.getElementById(id);
-
-        let valid = true;
-
-        if (id === 'photo') {
-
-            valid = input.files.length > 0;
-
-        } else if (id === 'size') {
-
-            valid = input.value.trim() !== '';
-
-        } else {
-
-            valid = input.checkValidity();
+            switchTab('order');
         }
 
-        if (!valid) {
+        // --- Order Form Logic ---
+        const dateInput = document.getElementById('delivery-date');
+        const minDate = new Date();
+        minDate.setDate(minDate.getDate() + 7);
+        const year = minDate.getFullYear();
+        const month = String(minDate.getMonth() + 1).padStart(2, '0');
+        const day = String(minDate.getDate()).padStart(2, '0');
+        dateInput.min = `${year}-${month}-${day}`;
+        dateInput.value = `${year}-${month}-${day}`; 
 
-            isValid = false;
+        // --- Custom Dropdown Logic ---
+        function toggleDropdown(el) {
+            const options = el.nextElementSibling;
+            const allOptions = document.querySelectorAll('.custom-options');
+            
+            // Close others
+            allOptions.forEach(opt => {
+                if (opt !== options) opt.classList.remove('show');
+            });
+            
+            el.classList.toggle('active');
+            options.classList.toggle('show');
+        }
 
-            const group = input.closest('.form-group');
+        function selectOption(el, value) {
+            const wrapper = el.closest('.custom-select-wrapper');
+            const select = wrapper.querySelector('.custom-select');
+            const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+            const selectedText = select.querySelector('.selected-text');
+            
+            selectedText.innerText = value;
+            hiddenInput.value = value;
+            select.classList.add('has-value');
+            
+            // UI updates
+            wrapper.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            
+            // Close
+            select.classList.remove('active');
+            wrapper.querySelector('.custom-options').classList.remove('show');
+        }
 
-            const error = group.querySelector('.error-text');
-
-            if (error) {
-                error.style.display = 'block';
-            }
-
-            input.classList.add('input-error');
-
-            if (!firstInvalid) {
-                firstInvalid = group;
+        // Close on outside click
+        window.onclick = function(event) {
+            if (!event.target.closest('.custom-select-wrapper')) {
+                document.querySelectorAll('.custom-options').forEach(opt => opt.classList.remove('show'));
+                document.querySelectorAll('.custom-select').forEach(sel => sel.classList.remove('active'));
             }
         }
-    });
 
-    if (!isValid) {
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('file-name');
+            const container = input.closest('.file-upload');
+            
+            if (input.files[0]) {
+                fileNameDisplay.innerText = input.files[0].name;
+                container.classList.add('has-file');
+            } else {
+                fileNameDisplay.innerText = "Click to upload your reference photo";
+                container.classList.remove('has-file');
+            }
+        }
 
-        firstInvalid.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
+        function clearError(inputElement) {
+            const formGroup = inputElement.closest('.form-group');
+            if (formGroup) {
+                const errorText = formGroup.querySelector('.error-text');
+                if (errorText) errorText.style.display = 'none';
+                
+                const wrappers = formGroup.querySelectorAll('.tel-wrapper, .custom-select-wrapper, .file-upload, input, select');
+                wrappers.forEach(w => w.classList.remove('input-error'));
+            }
+        }
 
-        return false;
-    }
+        const API_URL = 'https://scornith-art.onrender.com/api/orders';
 
-    const formData = new FormData(event.target);
+        function handleOrderSubmit(event) {
+            event.preventDefault();
+            
+            // --- Custom Inline Validation ---
+            let isValid = true;
+            let firstInvalid = null;
+            
+            const requiredInputs = ['name', 'email', 'contact', 'delivery-date', 'size', 'photo'];
+            
+            requiredInputs.forEach(id => {
+                const input = document.getElementById(id);
+                let isFieldValid = true;
+                
+                if (id === 'photo') {
+                    isFieldValid = input.files.length > 0;
+                } else if (id === 'size') {
+                    isFieldValid = input.value.trim() !== '';
+                } else if (id === 'email') {
+                    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+                    isFieldValid = emailRegex.test(input.value.trim());
+                } else {
+                    isFieldValid = input.checkValidity() && input.value.trim() !== '';
+                }
+                
+                if (!isFieldValid) {
+                    isValid = false;
+                    const formGroup = input.closest('.form-group');
+                    
+                    // Show error text
+                    const errorText = formGroup.querySelector('.error-text');
+                    if (errorText) errorText.style.display = 'block';
+                    
+                    // Add red border to the specific wrapper or input
+                    let targetWrapper = input;
+                    if (id === 'contact') targetWrapper = document.getElementById('contact-wrapper');
+                    if (id === 'size') targetWrapper = document.getElementById('size-wrapper');
+                    if (id === 'photo') targetWrapper = document.getElementById('photo-wrapper');
+                    
+                    targetWrapper.classList.add('input-error');
+                    
+                    if (!firstInvalid) firstInvalid = formGroup;
+                }
+            });
+            
+            if (!isValid) {
+                // Scroll to the first invalid field smoothly
+                if (firstInvalid) {
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return false;
+            }
+            
+            const formData = new FormData(event.target);
+            const photoFile = document.getElementById('photo').files[0];
 
-    const photoFile = document.getElementById('photo').files[0];
+            // Convert image to Base64 for storage
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const orderData = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    contact: '+91' + formData.get('contact'),
+                    deliveryDate: formData.get('delivery-date'),
+                    size: formData.get('size'),
+                    photo: e.target.result,
+                    message: formData.get('message')
+                };
 
-    const reader = new FileReader();
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(orderData)
+                    });
 
-    reader.onload = async function (e) {
+                    if (response.ok) {
+                        alert('✨ Order Confirmed! ✨\n\nYour order has been sucessfully placed. We will contact you soon for further details.\n\nThank you for choosing Scornith-Art.');
+                        event.target.reset();
+                        
+                        // Reset Custom Dropdown
+                        const customSelect = document.querySelector('.custom-select');
+                        const selectedText = customSelect.querySelector('.selected-text');
+                        const hiddenSizeInput = document.getElementById('size');
+                        selectedText.innerText = "Select Commission Type";
+                        customSelect.classList.remove('has-value');
+                        hiddenSizeInput.value = "";
+                        
+                        // Reset File Upload
+                        document.getElementById('file-name').innerText = "Click to upload your reference photo (Required)";
+                        document.querySelector('.file-upload').classList.remove('has-file');
 
-        const orderData = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            contact: '+91' + formData.get('contact'),
-            deliveryDate: formData.get('delivery-date'),
-            size: formData.get('size'),
-            photo: e.target.result,
-            message: formData.get('message')
-        };
+                        // Reset Date to Default (7 days from now)
+                        const nextWeek = new Date();
+                        nextWeek.setDate(nextWeek.getDate() + 7);
+                        const y = nextWeek.getFullYear();
+                        const m = String(nextWeek.getMonth() + 1).padStart(2, '0');
+                        const d = String(nextWeek.getDate()).padStart(2, '0');
+                        document.getElementById('delivery-date').value = `${y}-${m}-${d}`;
 
-        try {
+                    } else {
+                        throw new Error('Failed to save order');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('❌ Error: The sever is down. Please try again later or contact Nithyadharshini directly at 9370720618.');
+                }
+            };
+            reader.readAsDataURL(photoFile);
+            return false;
+        }
 
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(orderData)
+        // --- Admin Logic ---
+        async function openBase64InNewTab(base64) {
+            try {
+                const response = await fetch(base64);
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+            } catch (err) {
+                console.error('Error opening image:', err);
+                // Fallback: write to new window if blob fails
+                const newWindow = window.open();
+                if (newWindow) {
+                    newWindow.document.write(`<img src="${base64}" style="max-width: 100%; height: auto; border-radius: 8px;">`);
+                    newWindow.document.title = "Scornith Art - Reference Photo";
+                }
+            }
+        }
+
+        async function downloadImage(base64, name) {
+            try {
+                const response = await fetch(base64);
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `scornith_${name.replace(/\s+/g, '_')}_reference.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                console.error('Download failed:', err);
+                // Fallback for direct base64 download
+                const link = document.createElement('a');
+                link.href = base64;
+                link.download = `scornith_${name.replace(/\s+/g, '_')}_reference.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        async function loadOrders() {
+            try {
+                // Add timestamp to prevent browser caching
+                const response = await fetch(`${API_URL}?t=${Date.now()}`);
+                const orders = await response.json();
+                console.log('📦 Orders loaded from server:', orders.map(o => ({ id: o._id, notes: o.notes })));
+                
+                const body = document.getElementById('orders-body');
+                const emptyState = document.getElementById('empty-state');
+                
+                body.innerHTML = '';
+                if (orders.length === 0) {
+                    emptyState.style.display = 'block';
+                    
+                } else {
+                    emptyState.style.display = 'none';
+                    orders.forEach(order => {
+                        const tr = document.createElement('tr');
+                        const timestamp = new Date(order.createdAt).toLocaleDateString();
+                        
+                        tr.innerHTML = `
+                            <!-- SECTION 1: CLIENT DETAILS -->
+                            <td data-label="Date" style="font-size: 12px; color: gray;">${timestamp}</td>
+                            <td data-label="Name" contenteditable="true" onblur="updateOrderField('${order._id}', 'name', this.innerText)" style="color: white; font-weight: 500;">${order.name}</td>
+                            <td data-label="Email" contenteditable="true" onblur="updateOrderField('${order._id}', 'email', this.innerText)" style="font-size: 13px;">${order.email}</td>
+                            <td data-label="Contact" contenteditable="true" onblur="updateOrderField('${order._id}', 'contact', this.innerText)">${order.contact}</td>
+                            <td data-label="Size" contenteditable="true" onblur="updateOrderField('${order._id}', 'size', this.innerText)">${order.size}</td>
+                            <td data-label="Vision">
+                                <div style="font-size: 12px; color: #aaa; max-width: 120px; max-height: 50px; overflow-y: auto;">${order.message || 'N/A'}</div>
+                            </td>
+                            <td data-label="Photo" style="border-right: 2px solid var(--glass-border);">
+                                <img src="${order.photo}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; cursor: pointer;" onclick="openBase64InNewTab('${order.photo}')">
+                            </td>
+
+                            <!-- SECTION 2: ADMIN MANAGEMENT -->
+                            <td data-label="My Notes">
+                                <div id="note-container-${order._id}" style="display: flex; flex-direction: column; gap: 6px;">
+                                    <!-- View Mode (Sentence/Para) -->
+                                    <div id="note-view-${order._id}" class="note-para" style="display: ${order.notes ? 'block' : 'none'}; font-size: 13px; color: #ddd; max-width: 180px; white-space: normal; line-height: 1.4; overflow-wrap: break-word;">
+                                        ${order.notes || ''}
+                                    </div>
+                                    
+                                    <!-- Edit Mode (Textarea) -->
+                                    <textarea id="notes-${order._id}" class="notes-area" style="display: ${order.notes ? 'none' : 'block'}; width: 180px; height: 60px; font-size: 13px; background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--glass-border); padding: 5px; border-radius: 6px;">${order.notes || ''}</textarea>
+                                    
+                                    <!-- Dynamic Button -->
+                                    <button id="note-btn-${order._id}" onclick="toggleNoteEdit('${order._id}')" style="background: rgba(0,125,192,0.1); color: var(--accent); border: 1px solid rgba(0,125,192,0.2); padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; align-self: flex-start;">
+                                        ${order.notes ? 'Edit Note' : 'Save Note'}
+                                    </button>
+                                </div>
+                            </td>
+                            <td data-label="Status">
+                                <select class="status-select" onchange="updateOrderField('${order._id}', 'status', this.value)" style="background: rgba(0,125,192,0.1); color: var(--accent); border: 1px solid rgba(0,125,192,0.2);">
+                                    <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="In Progress" ${order.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                                    <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                                </select>
+                            </td>
+                            <td data-label="Actions">
+                                <div class="admin-actions" style="flex-direction: column; gap: 5px;">
+                                    <button onclick="downloadImage('${order.photo}', '${order.name}')" style="background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; width: 100%;">Download Image</button>
+                                    <button onclick="shareFullOrder('${encodeURIComponent(JSON.stringify(order))}', this)" style="background: var(--accent); color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; width: 100%;">Share Full</button>
+                                    <button onclick="deleteOrder('${order._id}')" style="background: rgba(255,50,50,0.1); color: #ff4d4d; border: 1px solid rgba(255,50,50,0.2); padding: 4px; border-radius: 6px; cursor: pointer; font-size: 11px; width: 100%;">Delete</button>
+                                </div>
+                            </td>
+                        `;
+                        body.appendChild(tr);
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('orders-body').innerHTML = '<tr><td colspan="9" style="text-align:center; color: #ff4d4d;">Error loading orders. Is the server running?</td></tr>';
+            }
+        }
+
+        async function updateOrderField(id, field, value) {
+            const indicator = document.getElementById('save-indicator');
+            indicator.style.opacity = '1';
+            indicator.innerText = '✨ Saving...';
+            
+            try {
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ [field]: value })
+                });
+                if (!response.ok) throw new Error('Update failed');
+                
+                setTimeout(() => {
+                    indicator.innerText = '✅ Saved to Database';
+                    setTimeout(() => indicator.style.opacity = '0', 1000);
+                }, 500);
+            } catch (err) {
+                console.error(err);
+                indicator.innerText = '❌ Save Error';
+                alert('Database Error: Your changes were not saved. Please check if your server is running.');
+            }
+        }
+
+        let saveTimeout;
+        function debouncedSave(id, field, value) {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                updateOrderField(id, field, value);
+            }, 1000);
+        }
+
+        // --- Delete with Undo Logic ---
+        let deletionTimeouts = {};
+
+        async function deleteOrder(id) {
+            // Ask for confirmation first
+            if (!confirm("Are you sure you want to delete this order?")) {
+                return;
+            }
+
+            // Hide the row immediately for a fast feel
+            const row = document.querySelector(`tr:has(#notes-${id})`) || document.getElementById(`note-container-${id}`)?.closest('tr');
+            if (row) row.style.display = 'none';
+
+            // Show WhatsApp-style toast
+            let toast = document.getElementById('whatsapp-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'whatsapp-toast';
+                toast.className = 'whatsapp-toast';
+                document.body.appendChild(toast);
+            }
+            
+            toast.innerHTML = `<span>Order deleted from database</span> <button onclick="undoDelete('${id}')">UNDO</button>`;
+            
+            // Force reflow for animation
+            void toast.offsetWidth;
+            toast.classList.add('show');
+
+            // Set timeout for actual deletion (7 seconds)
+            deletionTimeouts[id] = setTimeout(async () => {
+                toast.classList.remove('show');
+                try {
+                    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                    if (response.ok) {
+                        loadOrders();
+                    }
+                } catch (err) {
+                    console.error('Delete failed:', err);
+                }
+                delete deletionTimeouts[id];
+            }, 7000);
+        }
+
+        function undoDelete(id) {
+            if (deletionTimeouts[id]) {
+                clearTimeout(deletionTimeouts[id]);
+                delete deletionTimeouts[id];
+                const row = document.querySelector(`tr:has(#notes-${id})`) || document.getElementById(`note-container-${id}`)?.closest('tr');
+                if (row) row.style.display = ''; // restore row
+                
+                const toast = document.getElementById('whatsapp-toast');
+                if (toast) toast.classList.remove('show');
+            }
+        }
+
+        function toggleNoteEdit(id) {
+            const viewDiv = document.getElementById(`note-view-${id}`);
+            const editArea = document.getElementById(`notes-${id}`);
+            const btn = document.getElementById(`note-btn-${id}`);
+
+            if (editArea.style.display === 'none') {
+                // Switch to EDIT mode
+                viewDiv.style.display = 'none';
+                editArea.style.display = 'block';
+                btn.innerText = 'Save Note';
+                editArea.focus();
+            } else {
+                // Switch to VIEW mode (Save)
+                const newVal = editArea.value;
+                updateOrderField(id, 'notes', newVal);
+                
+                viewDiv.innerText = newVal;
+                viewDiv.style.display = newVal ? 'block' : 'none';
+                editArea.style.display = 'none';
+                btn.innerText = 'Edit Note';
+            }
+        }
+
+        function saveNoteManual(id) {
+            const val = document.getElementById(`notes-${id}`).value;
+            updateOrderField(id, 'notes', val);
+        }
+
+        async function shareFullOrder(encodedOrder, btn) {
+            const order = JSON.parse(decodeURIComponent(encodedOrder));
+            const row = btn.closest('tr');
+            const cols = row.querySelectorAll('td');
+            
+            const currentName = cols[1].innerText;
+            const currentEmail = cols[2].innerText;
+            const currentContact = cols[3].innerText;
+            const currentSize = cols[4].innerText;
+            const clientVision = cols[5].innerText;
+            const currentNotes = row.querySelector('.notes-area').value;
+            const currentStatus = row.querySelector('.status-select').value;
+
+            // Split size into artwork type and dimensions (e.g. "A4 - Single Portrait")
+            const sizeParts = currentSize.split(' - ');
+            const artworkSize = sizeParts[0] || 'N/A';
+            const artworkType = sizeParts[1] || 'Commissioned Art';
+
+            const fullSummary = `*SCORNITH ART — ORDER DETAILS* \n\n` +
+                                `Hello, I'm Nithya 👋\n\n` +
+                                `Your artwork order has been successfully confirmed 🤍\n\n` +
+                                `Please review the details below and confirm that everything is correct 👇🏻\n\n` +
+                                `━━━━━━━━━━━━━━━\n\n` +
+                                `👤 *Name:* ${currentName}\n\n` +
+                                `📞 *Contact:* ${currentContact}\n\n` +
+                                `🖼️ *Artwork:* ${artworkType}\n\n` +
+                                `📐 *Size:* ${artworkSize}\n\n` +
+                                `📅 *Estimated Delivery:* ${order.deliveryDate || 'TBD'}\n\n` +
+                                `🔖 *Order Status:* ${currentStatus}\n\n` +
+                                `📝 *Artist Notes:* ${currentNotes || 'None'}\n\n` +
+                                `━━━━━━━━━━━━━━━\n\n` +
+                                `📌 *Requirements:* ${clientVision}\n\n\n` +
+                                `Thank you for supporting *SCORNITH ART* 💙\n\n` +
+                                `You will receive updates as the artwork progresses ✨\n\n` +
+                                `With love,\n` +
+                                `Nithya 🤍`;
+            
+            // Try Web Share API (Best for Mobile)
+            if (navigator.share) {
+                try {
+                    const shareData = {
+                        title: `Order - ${currentName}`,
+                        text: fullSummary
+                    };
+
+                    // Attempt to include image file
+                    try {
+                        const response = await fetch(order.photo);
+                        const blob = await response.blob();
+                        const file = new File([blob], `reference_${currentName.replace(/\s+/g, '_')}.jpg`, { type: 'image/jpeg' });
+
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            shareData.files = [file];
+                        }
+                    } catch (fileErr) {
+                        console.warn('Could not process image for sharing:', fileErr);
+                    }
+
+                    await navigator.share(shareData);
+                    return; // Success
+                } catch (err) {
+                    console.error('Web Share failed:', err);
+                }
+            }
+
+            // Fallback for Desktop/Unsupported Browsers
+            const cleanPhone = currentContact.replace(/\D/g, '');
+            const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(fullSummary)}`;
+            
+            const choice = confirm('Direct image sharing not supported. Send summary via WhatsApp?\n\n(Cancel to copy text)');
+            if (choice) window.open(waLink, '_blank');
+            else navigator.clipboard.writeText(fullSummary).then(() => alert('📋 Summary Copied!'));
+        }
+
+
+
+        function exportToCSV() {
+            const table = document.getElementById('orders-table');
+            let csv = 'Timestamp,Name,Email,Contact,Size,Delivery Date,Status,Notes\n';
+            
+            const rows = document.querySelectorAll('#orders-body tr');
+            rows.forEach(row => {
+                const cols = row.querySelectorAll('td');
+                const timestamp = cols[0].innerText;
+                const name = cols[1].innerText;
+                const email = cols[2].innerText;
+                const contact = cols[3].innerText;
+                const size = cols[4].innerText;
+                const vision = cols[5].innerText.replace(/,/g, ';');
+                const status = row.querySelector('.status-select').value;
+                const notes = row.querySelector('.notes-area').value.replace(/,/g, ';'); 
+                
+                csv += `"${timestamp}","${name}","${email}","${contact}","${size}","${vision}","${status}","${notes}"\n`;
             });
 
-            if (response.ok) {
-
-                alert(
-                    '✨ Order Confirmed!\n\nThank you for choosing Scornith Art 💙'
-                );
-
-                event.target.reset();
-
-                resetFormUI();
-
-            } else {
-
-                throw new Error('Failed');
-            }
-
-        } catch (err) {
-
-            console.error(err);
-
-            alert('❌ Server error. Please try again later.');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'scornith_orders.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
-    };
 
-    reader.readAsDataURL(photoFile);
+       async function loadOrders() {
 
-    return false;
-}
-
-// ===============================
-// RESET FORM UI
-// ===============================
-function resetFormUI() {
-
-    document.getElementById('file-name').innerText =
-        'Click to upload your reference photo (Required)';
-
-    document
-        .querySelector('.file-upload')
-        .classList.remove('has-file');
-
-    const customSelect = document.querySelector('.custom-select');
-
-    customSelect
-        .querySelector('.selected-text')
-        .innerText = 'Select Commission Type';
-
-    customSelect.classList.remove('has-value');
-
-    document.getElementById('size').value = '';
-}
-
-// ===============================
-// LOAD ORDERS
-// ===============================
-async function loadOrders() {
+    const body = document.getElementById('orders-body');
 
     try {
 
-        const response = await fetch(`${API_URL}?t=${Date.now()}`);
+        body.innerHTML = `
+            <tr>
+                <td colspan="10" style="text-align:center;">
+                    Loading...
+                </td>
+            </tr>
+        `;
+
+        const response = await fetch(
+            `${API_URL}?t=${Date.now()}`
+        );
+
+        if (!response.ok) {
+            throw new Error('Server error');
+        }
 
         const orders = await response.json();
 
-        const body = document.getElementById('orders-body');
+        console.log("Orders:", orders);
 
         body.innerHTML = '';
 
-        if (orders.length === 0) {
+        if (!orders || orders.length === 0) {
 
-            document.getElementById('empty-state').style.display = 'block';
+            body.innerHTML = `
+                <tr>
+                    <td colspan="10" style="text-align:center;">
+                        No Orders Yet
+                    </td>
+                </tr>
+            `;
 
             return;
         }
 
-        document.getElementById('empty-state').style.display = 'none';
-
         orders.forEach(order => {
 
-            const tr = document.createElement('tr');
+            const row = document.createElement('tr');
 
-            tr.innerHTML = `
+            row.innerHTML = `
                 <td>${new Date(order.createdAt).toLocaleDateString()}</td>
                 <td>${order.name}</td>
                 <td>${order.email}</td>
                 <td>${order.contact}</td>
                 <td>${order.size}</td>
                 <td>${order.message || 'N/A'}</td>
-                <td>
-                    <img src="${order.photo}"
-                    style="width:50px;height:50px;
-                    object-fit:cover;
-                    border-radius:6px;
-                    cursor:pointer"
-                    onclick="openBase64InNewTab('${order.photo}')">
-                </td>
 
                 <td>
-                    <select onchange="updateOrderField('${order._id}','status',this.value)">
-                        <option value="Pending">Pending</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                    </select>
+                    <img src="${order.photo}"
+                    style="
+                        width:60px;
+                        height:60px;
+                        object-fit:cover;
+                        border-radius:8px;
+                    ">
                 </td>
+
+                <td>${order.status || 'Pending'}</td>
 
                 <td>
                     <button onclick="deleteOrder('${order._id}')">
@@ -650,209 +848,27 @@ async function loadOrders() {
                 </td>
             `;
 
-            body.appendChild(tr);
+            body.appendChild(row);
         });
 
-    } catch (err) {
+    } catch(err) {
 
         console.error(err);
+
+        body.innerHTML = `
+            <tr>
+                <td colspan="10"
+                style="
+                    text-align:center;
+                    color:red;
+                    padding:20px;
+                ">
+                    Failed to load orders
+                </td>
+            </tr>
+        `;
     }
 }
-
-// ===============================
-// UPDATE FIELD
-// ===============================
-async function updateOrderField(id, field, value) {
-
-    try {
-
-        await fetch(`${API_URL}/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                [field]: value
-            })
-        });
-
-    } catch (err) {
-
-        console.error(err);
-    }
-}
-
-// ===============================
-// DELETE ORDER
-// ===============================
-async function deleteOrder(id) {
-
-    const confirmDelete = confirm(
-        'Are you sure you want to delete this order?'
-    );
-
-    if (!confirmDelete) return;
-
-    try {
-
-        await fetch(`${API_URL}/${id}`, {
-            method: 'DELETE'
-        });
-
-        loadOrders();
-
-    } catch (err) {
-
-        console.error(err);
-    }
-}
-
-// ===============================
-// OPEN IMAGE
-// ===============================
-async function openBase64InNewTab(base64) {
-
-    const win = window.open();
-
-    win.document.write(`
-        <img src="${base64}"
-        style="max-width:100%;
-        border-radius:10px;">
-    `);
-}
-
-// ===============================
-// EXPORT CSV
-// ===============================
-function exportToCSV() {
-
-    let csv =
-        'Name,Email,Contact,Size,Status\n';
-
-    document.querySelectorAll('#orders-body tr').forEach(row => {
-
-        const cols = row.querySelectorAll('td');
-
-        csv += `
-"${cols[1].innerText}",
-"${cols[2].innerText}",
-"${cols[3].innerText}",
-"${cols[4].innerText}"
-\n`;
-    });
-
-    const blob = new Blob([csv], {
-        type: 'text/csv'
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-
-    a.href = url;
-
-    a.download = 'orders.csv';
-
-    a.click();
-}
-
-// ===============================
-// PARTICLE BACKGROUND
-// ===============================
-const canvas = document.getElementById('sea-particles');
-
-if (canvas) {
-
-    const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-
-        canvas.width = window.innerWidth;
-
-        canvas.height = window.innerHeight;
-    }
-
-    resizeCanvas();
-
-    window.addEventListener('resize', resizeCanvas);
-
-    class Bubble {
-
-        constructor() {
-            this.reset();
-        }
-
-        reset() {
-
-            this.x = Math.random() * canvas.width;
-
-            this.y = canvas.height + 20;
-
-            this.size = Math.random() * 3 + 1;
-
-            this.speedY = Math.random() * 1.5 + 0.5;
-
-            this.opacity = Math.random() * 0.5 + 0.1;
-        }
-
-        update() {
-
-            this.y -= this.speedY;
-
-            if (this.y < -20) {
-                this.reset();
-            }
-        }
-
-        draw() {
-
-            ctx.beginPath();
-
-            ctx.arc(
-                this.x,
-                this.y,
-                this.size,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle =
-                `rgba(0,242,255,${this.opacity})`;
-
-            ctx.fill();
-        }
-    }
-
-    const bubbles = [];
-
-    for (let i = 0; i < 80; i++) {
-        bubbles.push(new Bubble());
-    }
-
-    function animate() {
-
-        ctx.clearRect(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-        bubbles.forEach(bubble => {
-            bubble.update();
-            bubble.draw();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
-
-// ===============================
-// INITIAL LOAD
-// ===============================
-loadOrders();
-</script>
+    </script>
 </body>
 </html>
