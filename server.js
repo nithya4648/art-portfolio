@@ -1,96 +1,206 @@
 require('dotenv').config();
+
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '10mb' })); // Increased limit for Base64 images
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Serve Static Files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Home Route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/scornith_art')
-.then(() => console.log('✅ Connected to MongoDB'))
-.catch(err => console.log('❌ MongoDB Connection Error:', err));
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+    console.log('✅ Connected to MongoDB');
+})
+.catch((err) => {
+    console.log('❌ MongoDB Connection Error:', err);
+});
 
 // Order Schema
 const orderSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    contact: { type: String, required: true },
-    deliveryDate: { type: String, required: true },
-    size: { type: String, required: true },
-    photo: { type: String, required: true }, // Base64 string
-    message: String,
-    notes: { type: String, default: '' },
-    status: { type: String, default: 'Pending', enum: ['Pending', 'In Progress', 'Completed'] },
-    createdAt: { type: Date, default: Date.now }
+    name: {
+        type: String,
+        required: true
+    },
+
+    email: {
+        type: String,
+        required: true
+    },
+
+    contact: {
+        type: String,
+        required: true
+    },
+
+    deliveryDate: {
+        type: String,
+        required: true
+    },
+
+    size: {
+        type: String,
+        required: true
+    },
+
+    photo: {
+        type: String,
+        required: true
+    },
+
+    message: {
+        type: String
+    },
+
+    notes: {
+        type: String,
+        default: ''
+    },
+
+    status: {
+        type: String,
+        default: 'Pending',
+        enum: ['Pending', 'In Progress', 'Completed']
+    },
+
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const Order = mongoose.model('Order', orderSchema);
 
-// API Routes
-
-// Create Order
+// =======================
+// CREATE ORDER
+// =======================
 app.post('/api/orders', async (req, res) => {
     try {
         const newOrder = new Order(req.body);
+
         await newOrder.save();
-        res.status(201).json(newOrder);
+
+        res.status(201).json({
+            success: true,
+            message: 'Order Created Successfully',
+            data: newOrder
+        });
+
     } catch (err) {
-        res.status(400).json({ error: err.message });
+
+        res.status(400).json({
+            success: false,
+            error: err.message
+        });
     }
 });
 
-// Get All Orders
+// =======================
+// GET ALL ORDERS
+// =======================
 app.get('/api/orders', async (req, res) => {
     try {
-        const orders = await Order.find().sort({ createdAt: -1 });
-        res.json(orders);
+
+        const orders = await Order.find()
+        .sort({ createdAt: -1 });
+
+        res.json({
+            success: true,
+            data: orders
+        });
+
     } catch (err) {
-        res.status(500).json({ error: err.message });
+
+        res.status(500).json({
+            success: false,
+            error: err.message
+        });
     }
 });
 
-// Update Order Details
+// =======================
+// UPDATE ORDER
+// =======================
 app.patch('/api/orders/:id', async (req, res) => {
     try {
-        console.log(`📡 Update request for ID: ${req.params.id}`, req.body);
-        
-        // Use $set to explicitly update fields provided in req.body
+
         const updatedOrder = await Order.findByIdAndUpdate(
-            req.params.id, 
+            req.params.id,
             { $set: req.body },
-            { new: true, runValidators: true }
+            {
+                new: true,
+                runValidators: true
+            }
         );
 
         if (!updatedOrder) {
-            console.log('❌ Order not found');
-            return res.status(404).json({ error: 'Order not found' });
+            return res.status(404).json({
+                success: false,
+                error: 'Order not found'
+            });
         }
 
-        console.log('✅ Order saved. Notes content:', updatedOrder.notes);
-        res.json(updatedOrder);
+        res.json({
+            success: true,
+            message: 'Order Updated Successfully',
+            data: updatedOrder
+        });
+
     } catch (err) {
-        console.error('❌ Update error:', err.message);
-        res.status(400).json({ error: err.message });
+
+        res.status(400).json({
+            success: false,
+            error: err.message
+        });
     }
 });
 
-// Delete Order
+// =======================
+// DELETE ORDER
+// =======================
 app.delete('/api/orders/:id', async (req, res) => {
     try {
-        await Order.findByIdAndDelete(req.params.id);
-        res.json({ message: 'Order deleted successfully' });
+
+        const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+
+        if (!deletedOrder) {
+            return res.status(404).json({
+                success: false,
+                error: 'Order not found'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Order Deleted Successfully'
+        });
+
     } catch (err) {
-        res.status(500).json({ error: err.message });
+
+        res.status(500).json({
+            success: false,
+            error: err.message
+        });
     }
 });
-app.get("/", (req, res) => {
-    res.send("Backend Running 🚀");
-});
+
+// =======================
+// SERVER START
+// =======================
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
 });
