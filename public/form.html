@@ -161,9 +161,6 @@
                     <tbody id="orders-body">
                     </tbody>
                 </table>
-                        <!-- Orders will be loaded here -->
-                    </tbody>
-                </table>
                 <div id="empty-state" class="empty-msg" style="display: none;">No orders yet.</div>
             </div>
         </div>
@@ -776,99 +773,65 @@
             document.body.removeChild(a);
         }
 
-       async function loadOrders() {
+        // Initial load
+        loadOrders();
 
-    const body = document.getElementById('orders-body');
+        // --- Deep Sea Particles ---
+        const seaParticlesCanvas = document.getElementById('sea-particles');
+        if (seaParticlesCanvas) {
+            const seaCtx = seaParticlesCanvas.getContext('2d');
+            
+            function resizeSea() {
+                seaParticlesCanvas.width = window.innerWidth;
+                seaParticlesCanvas.height = window.innerHeight;
+            }
+            
+            window.addEventListener('resize', resizeSea);
+            resizeSea();
 
-    try {
+            class Bubble {
+                constructor() {
+                    this.reset();
+                    this.y = Math.random() * seaParticlesCanvas.height; // Distribute initially
+                }
+                reset() {
+                    this.x = Math.random() * seaParticlesCanvas.width;
+                    this.y = seaParticlesCanvas.height + 10;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedY = (Math.random() * 1.5 + 0.8) * -1; // Faster upward float
+                    this.speedX = (Math.random() - 0.5) * 0.8; // More dynamic side sway
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.y < -10) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    seaCtx.fillStyle = `rgba(0, 242, 255, ${this.opacity})`;
+                    seaCtx.beginPath();
+                    seaCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    seaCtx.fill();
+                }
+            }
 
-        body.innerHTML = `
-            <tr>
-                <td colspan="10" style="text-align:center;">
-                    Loading...
-                </td>
-            </tr>
-        `;
+            let bubbles = [];
+            for (let i = 0; i < 80; i++) {
+                bubbles.push(new Bubble());
+            }
 
-        const response = await fetch(
-            `${API_URL}?t=${Date.now()}`
-        );
-
-        if (!response.ok) {
-            throw new Error('Server error');
+            function animateSea() {
+                seaCtx.clearRect(0, 0, seaParticlesCanvas.width, seaParticlesCanvas.height);
+                bubbles.forEach(b => {
+                    b.update();
+                    b.draw();
+                });
+                requestAnimationFrame(animateSea);
+            }
+            animateSea();
         }
-
-        const orders = await response.json();
-
-        console.log("Orders:", orders);
-
-        body.innerHTML = '';
-
-        if (!orders || orders.length === 0) {
-
-            body.innerHTML = `
-                <tr>
-                    <td colspan="10" style="text-align:center;">
-                        No Orders Yet
-                    </td>
-                </tr>
-            `;
-
-            return;
-        }
-
-        orders.forEach(order => {
-
-            const row = document.createElement('tr');
-
-            row.innerHTML = `
-                <td>${new Date(order.createdAt).toLocaleDateString()}</td>
-                <td>${order.name}</td>
-                <td>${order.email}</td>
-                <td>${order.contact}</td>
-                <td>${order.size}</td>
-                <td>${order.message || 'N/A'}</td>
-
-                <td>
-                    <img src="${order.photo}"
-                    style="
-                        width:60px;
-                        height:60px;
-                        object-fit:cover;
-                        border-radius:8px;
-                    ">
-                </td>
-
-                <td>${order.status || 'Pending'}</td>
-
-                <td>
-                    <button onclick="deleteOrder('${order._id}')">
-                        Delete
-                    </button>
-                </td>
-            `;
-
-            body.appendChild(row);
-        });
-
-    } catch(err) {
-
-        console.error(err);
-
-        body.innerHTML = `
-            <tr>
-                <td colspan="10"
-                style="
-                    text-align:center;
-                    color:red;
-                    padding:20px;
-                ">
-                    Failed to load orders
-                </td>
-            </tr>
-        `;
-    }
-}
     </script>
 </body>
 </html>
