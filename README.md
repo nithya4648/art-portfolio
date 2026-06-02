@@ -18,4 +18,4 @@ A modern, cinematic portfolio and commission platform for Scornith Art. Built wi
 - **Design:** CSS Glassmorphism, AOS Animations, Custom Canvas Particles
 
 ## 🌐 Live Preview
-Check out the live website here: [https://scornith-art-gallery.netlify.app/](https://scornith-art-gallery.netlify.app/)
+Check out the live website here: [https://scornith-art.onrender.com/](https://scornith-art.onrender.com/)
