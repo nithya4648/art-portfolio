@@ -197,6 +197,30 @@
             }
         }
 
+        async function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Login successful");
+            } else {
+                alert("Invalid credentials");
+            }
+        }
+
         // Admin credentials (you can add more accounts to this array in the future)
         const ADMIN_ACCOUNTS = [
             { user: 'nithya4648@gmail.com', pass: 'Cat1@artpassword' }

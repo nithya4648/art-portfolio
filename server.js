@@ -204,3 +204,24 @@ app.delete('/api/orders/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
+
+const ADMIN_ACCOUNTS = [
+  {
+    user: process.env.ADMIN_EMAIL,
+    pass: process.env.ADMIN_PASSWORD
+  }
+];
+
+// ✅ Admin Login
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+
+    if (
+        email === process.env.ADMIN_EMAIL &&
+        password === process.env.ADMIN_PASSWORD
+    ) {
+        return res.json({ success: true });
+    }
+
+    res.json({ success: false });
+});
