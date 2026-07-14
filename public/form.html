@@ -240,8 +240,7 @@ async function handleLogin(event) {
             })
         });
 
-        const text = await response.text();
-console.log("LOGIN RESPONSE:", text);
+        const data = await response.json();
 
         if (data.success) {
 
