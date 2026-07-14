@@ -197,29 +197,7 @@
             }
         }
 
-        async function login() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            const response = await fetch("/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert("Login successful");
-            } else {
-                alert("Invalid credentials");
-            }
-        }
+       let isLoggedIn = false;
 
         // Tab Switching Logic
         function switchTab(tab) {
@@ -242,28 +220,55 @@
                 }
             }
         }
+async function handleLogin(event) {
+    event.preventDefault();
 
-        function handleLogin(event) {
-            event.preventDefault();
-            const user = document.getElementById('admin-user').value.trim();
-            const pass = document.getElementById('admin-pass').value;
-            const errorEl = document.getElementById('login-error');
+    const email = document.getElementById("admin-user").value.trim();
+    const password = document.getElementById("admin-pass").value;
+    const errorEl = document.getElementById("login-error");
 
-            // Check if credentials match any account in the ADMIN_ACCOUNTS array
-            const validAccount = ADMIN_ACCOUNTS.find(acc => acc.user === user && acc.pass === pass);
+    try {
 
-            if (validAccount) {
-                isLoggedIn = true;
-                errorEl.textContent = '';
-                document.getElementById('admin-login').style.display = 'none';
-                document.getElementById('admin-dashboard').style.display = 'block';
-                loadOrders();
-            } else {
-                errorEl.textContent = '❌ Invalid email or password.';
-                document.getElementById('admin-pass').value = '';
-            }
-            return false;
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            isLoggedIn = true;
+
+            document.getElementById("admin-login").style.display = "none";
+            document.getElementById("admin-dashboard").style.display = "block";
+
+            errorEl.textContent = "";
+
+            loadOrders();
+
+        } else {
+
+            errorEl.textContent = "❌ Invalid Email or Password";
+            document.getElementById("admin-pass").value = "";
+
         }
+
+    } catch (err) {
+
+        console.error(err);
+        errorEl.textContent = "❌ Unable to connect to server.";
+
+    }
+
+    return false;
+}
 
         // Logout handler
         function handleLogout() {
