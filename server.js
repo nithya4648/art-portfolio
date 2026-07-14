@@ -196,6 +196,25 @@ app.delete('/api/orders/:id', async (req, res) => {
             error: err.message
         });
     }
+});// =======================
+// ADMIN LOGIN
+// =======================
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+
+    if (
+        email === process.env.ADMIN_EMAIL &&
+        password === process.env.ADMIN_PASSWORD
+    ) {
+        return res.json({
+            success: true
+        });
+    }
+
+    return res.status(401).json({
+        success: false,
+        message: "Invalid credentials"
+    });
 });
 
 // =======================
@@ -204,10 +223,3 @@ app.delete('/api/orders/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
-
-const ADMIN_ACCOUNTS = [
-  {
-    user: process.env.ADMIN_EMAIL,
-    pass: process.env.ADMIN_PASSWORD
-  }
-];
